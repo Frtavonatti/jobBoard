@@ -1,10 +1,10 @@
 # TODO - Frontend Development
 
 ## **Setup**
-- [ ] Initialize React app using `create-react-app` or `Vite`.
-- [ ] Install dependencies: `axios`, `react-router-dom`, `context`, `tailwindcss` or `material-ui`.
+- [x] Initialize React app using `create-react-app` or `Vite`.
+- [ ] Install dependencies: `axios`, `react-router-dom`, `context`, `tailwindcss`.
 - [ ] Set up the project structure:
-  - [ ] `components/`
+  - [x] `components/`
   - [ ] `pages/`
   - [ ] `context/`
   - [ ] `utils/`

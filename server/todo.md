@@ -1,8 +1,8 @@
 # TODO - Backend Development
 
 ## **Setup**
-- [ ] Initialize a Node.js project (`npm init`).
-- [ ] Install dependencies: `express`, `mongoose`, `dotenv`, `cors`, `bcrypt`, `jsonwebtoken`.
+- [x] Initialize a Node.js project (`npm init`).
+- [x] Install dependencies: `express`, `mongoose`, `dotenv`, `cors`, `bcrypt`, `jsonwebtoken`.
 - [ ] Set up the project structure:
   - [ ] `controllers/`
   - [ ] `models/`
