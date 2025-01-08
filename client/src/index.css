@@ -3,13 +3,21 @@
 @tailwind utilities;
 
 @layer base {
+  :root,
+  html,
   body {
     @apply 
+    bg-white
     dark:bg-slate-950
+    text-black
     dark:text-white
-    text-center
-    max-w-screen-xl
+    min-h-screen
+    text-center;
+  }
+
+  body {
+    @apply 
     mx-auto
-    p-8
+    p-8;
   }
 }

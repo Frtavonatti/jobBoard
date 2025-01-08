@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom"
+import { useJobContext } from "../context/JobContext"
 import { useState, useEffect } from "react"
 import jobService from '../services/jobs'
 import JobCardPreview from "../components/JobCardPreview"
 
 const JobListPage = () => {
-  const [jobs, setJobs] = useState([])
+  const [{ jobs }, dispatch] = useJobContext()
   const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     jobService.getJobs()
-    .then((data) => setJobs(data))
+    .then((data) => dispatch({ type: 'SET_JOBS', payload: data }))
     .catch((error) => console.error('Error fetching jobs:', error))
-  }, [])
+  }, [dispatch])
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value)

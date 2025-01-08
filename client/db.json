@@ -14,7 +14,12 @@
       "salary": "120000",
       "datePosted": "2023-10-01",
       "employmentType": "Full-time",
-      "seniority": "Senior"
+      "seniority": "Senior",
+      "tasks": [
+        "Write clean, scalable code",
+        "Collaborate with cross-functional teams",
+        "Troubleshoot and debug applications"
+      ]
     },
     {
       "id": 2,
@@ -30,7 +35,12 @@
       "salary": "110000",
       "datePosted": "2023-10-05",
       "employmentType": "Part-time",
-      "seniority": "Mid-level"
+      "seniority": "Mid-level",
+      "tasks": [
+        "Collect and analyze large data sets",
+        "Develop predictive models",
+        "Communicate findings to stakeholders"
+      ]
     },
     {
       "id": 3,
@@ -46,7 +56,12 @@
       "salary": "130000",
       "datePosted": "2023-10-10",
       "employmentType": "Full-time",
-      "seniority": "Senior"
+      "seniority": "Senior",
+      "tasks": [
+        "Define product vision and strategy",
+        "Manage product lifecycle",
+        "Coordinate with engineering and design teams"
+      ]
     },
     {
       "id": 4,
@@ -62,7 +77,12 @@
       "salary": "90000",
       "datePosted": "2023-10-12",
       "employmentType": "Full-time",
-      "seniority": "Junior"
+      "seniority": "Mid-level",
+      "tasks": [
+        "Create wireframes and prototypes",
+        "Conduct user research and testing",
+        "Collaborate with developers to implement designs"
+      ]
     }
   ]
 }
