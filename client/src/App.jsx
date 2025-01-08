@@ -1,38 +1,44 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-
+import Header from './components/Header'
 import JobCardPreview from './components/JobCardPreview'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import NewJob from './components/NewJob'
 
 function App() {
   const [jobs, setJobs] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
+  const [theme, setTheme] = useState('light')
   
   useEffect(() => {
-    axios('http://localhost:3001/jobPostings')
+    axios('http://localhost:3001/jobs')
     .then((res) => res.data)
     .then((data) => setJobs(data))
     .catch((error) => console.error('Error fetching jobs:', error))
   }, [])
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [theme])
   
   const handleSearch = (event) => {
     setSearchTerm(event.target.value)
   }
 
+  const handleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
+  }
+  
   const filteredJobs = jobs.filter((job) => 
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
   )
   
   return (
     <>
-      <div>
-        <div className='flex justify-center items-center'>
-          <img src={reactLogo} className="logo react" alt="React logo" />
-          <h2>Recruitalize</h2>
-        </div>
-      </div>
-      
+      <Header handleTheme={handleTheme} />
       <section>
         <h2>JobBoard</h2>
 
@@ -51,6 +57,9 @@ function App() {
         {filteredJobs.map((job) => (
           <JobCardPreview key={job.id} job={job} />  
         ))}
+
+        {/* NewJobSection */}
+        {/* <NewJob /> */}
       </section>
     </>
   )

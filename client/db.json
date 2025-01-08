@@ -1,5 +1,5 @@
 {
-  "jobPostings": [
+  "jobs": [
     {
       "id": 1,
       "title": "Software Engineer",
@@ -12,7 +12,9 @@
         "Proficiency in JavaScript, HTML, CSS"
       ],
       "salary": "120000",
-      "datePosted": "2023-10-01"
+      "datePosted": "2023-10-01",
+      "employmentType": "Full-time",
+      "seniority": "Mid-level"
     },
     {
       "id": 2,
@@ -26,7 +28,9 @@
         "Proficiency in Python, R, SQL"
       ],
       "salary": "110000",
-      "datePosted": "2023-10-05"
+      "datePosted": "2023-10-05",
+      "employmentType": "Full-time",
+      "seniority": "Mid-level"
     },
     {
       "id": 3,
@@ -40,7 +44,9 @@
         "Strong leadership and communication skills"
       ],
       "salary": "130000",
-      "datePosted": "2023-10-10"
+      "datePosted": "2023-10-10",
+      "employmentType": "Full-time",
+      "seniority": "Senior-level"
     },
     {
       "id": 4,
@@ -54,7 +60,9 @@
         "Proficiency in design tools like Sketch, Figma"
       ],
       "salary": "90000",
-      "datePosted": "2023-10-12"
+      "datePosted": "2023-10-12",
+      "employmentType": "Full-time",
+      "seniority": "Mid-level"
     }
   ]
 }
