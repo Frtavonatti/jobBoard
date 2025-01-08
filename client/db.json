@@ -14,7 +14,7 @@
       "salary": "120000",
       "datePosted": "2023-10-01",
       "employmentType": "Full-time",
-      "seniority": "Mid-level"
+      "seniority": "Senior"
     },
     {
       "id": 2,
@@ -29,7 +29,7 @@
       ],
       "salary": "110000",
       "datePosted": "2023-10-05",
-      "employmentType": "Full-time",
+      "employmentType": "Part-time",
       "seniority": "Mid-level"
     },
     {
@@ -46,7 +46,7 @@
       "salary": "130000",
       "datePosted": "2023-10-10",
       "employmentType": "Full-time",
-      "seniority": "Senior-level"
+      "seniority": "Senior"
     },
     {
       "id": 4,
@@ -62,7 +62,7 @@
       "salary": "90000",
       "datePosted": "2023-10-12",
       "employmentType": "Full-time",
-      "seniority": "Mid-level"
+      "seniority": "Junior"
     }
   ]
 }
