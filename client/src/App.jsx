@@ -1,31 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { JobProvider } from './context/JobContext'
-import { useState, useEffect } from 'react'
-import JobListPage from './pages/JobListPage'
-import JobDetailsPage from './pages/JobDetailsPage'
-import NewJobForm from './pages/NewJobForm'
-import Header from './components/Header'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { JobProvider } from "./context/JobContext";
+import { useState, useEffect } from "react";
+import JobListPage from "./pages/JobListPage";
+import JobDetailsPage from "./pages/JobDetailsPage";
+import NewJobForm from "./pages/NewJobForm";
+import Header from "./components/Header";
 
 function App() {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light'
-  })
+    return localStorage.getItem("theme") || "light";
+  });
 
   useEffect(() => {
-    localStorage.setItem('theme', theme)
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark')
+    localStorage.setItem("theme", theme);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove("dark");
     }
-  }, [theme])
+  }, [theme]);
 
   const handleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }
-  
+    setTheme(theme === "light" ? "dark" : "light");
+  };
+
   return (
-    <Router> 
+    <Router>
       <JobProvider>
         <Header handleTheme={handleTheme} />
         <Routes>
@@ -35,7 +35,7 @@ function App() {
         </Routes>
       </JobProvider>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -9,6 +9,6 @@ const getJobs = async () => {
   } catch (error) {
     console.error("Error fetching jobs:", error);
   }
-}
+};
 
 export default { getJobs };
