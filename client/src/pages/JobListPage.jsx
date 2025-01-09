@@ -24,7 +24,7 @@ const JobListPage = () => {
   );
 
   return (
-    <>
+    <div className="px-8">
       <div className="mt-8 flex items-center justify-between">
         <h2 className="text-4xl font-bold">JobBoard</h2>
         <Link to="/new">
@@ -47,7 +47,7 @@ const JobListPage = () => {
           <JobCardPreview key={job.id} job={job} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

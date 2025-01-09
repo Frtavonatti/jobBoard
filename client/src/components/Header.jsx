@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom";
 import ToggleThemeIcon from "./ui/ToggleThemeIcon";
 import reactLogo from "../assets/react.svg";
 
 const Header = ({ handleTheme }) => {
   return (
-    <header className="flex items-center justify-between">
+    <header className="flex items-center justify-between p-2">
       <div className="flex items-center justify-center">
-        <img src={reactLogo} className="logo react" alt="React logo" />
-        <span className="ml-2 text-2xl">Recruitalize</span>
+        <img src={reactLogo} className="ml-2" alt="React logo" />
+        <Link to="/" className="logo">
+          <span className="ml-2 text-2xl font-bold">Recruitalize</span>
+        </Link>
       </div>
 
       <div className="flex items-center justify-center">

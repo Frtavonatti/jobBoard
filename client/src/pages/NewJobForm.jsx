@@ -1,6 +1,6 @@
 const NewJobForm = () => {
   return (
-    <>
+    <div className="px-8">
       <h3 className="mt-8 text-2xl font-bold">New Listing</h3>
       <form className="grid grid-cols-1 gap-4 rounded-md p-4 shadow-md sm:grid-cols-2 lg:grid-cols-3">
         <label className="block">
@@ -59,7 +59,7 @@ const NewJobForm = () => {
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

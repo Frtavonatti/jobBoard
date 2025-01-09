@@ -6,10 +6,10 @@
   :root,
   html,
   body {
-    @apply min-h-screen bg-white text-center text-black dark:bg-slate-950 dark:text-white;
+    @apply min-h-screen text-center;
   }
 
   body {
-    @apply mx-auto p-8;
+    @apply mx-auto;
   }
 }
