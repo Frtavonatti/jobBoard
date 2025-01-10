@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useJobContext } from "../context/JobContext";
 import { useState, useEffect } from "react";
 import jobService from "../services/jobs";
-import JobCardPreview from "../components/JobCardPreview";
+import Card from "../components/job/Card";
 
 const JobListPage = () => {
   const [{ jobs }, dispatch] = useJobContext();
@@ -44,7 +44,7 @@ const JobListPage = () => {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filteredJobs.map((job) => (
-          <JobCardPreview key={job.id} job={job} />
+          <Card key={job.id} job={job} />
         ))}
       </div>
     </div>

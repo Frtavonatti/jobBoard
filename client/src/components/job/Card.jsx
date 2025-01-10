@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const JobCardPreview = ({ job }) => {
+const Card = ({ job }) => {
   return (
     <div className="mt-6 flex min-w-[320px] flex-col rounded-md border p-4 dark:border-slate-800">
       <div className="flex flex-col">
@@ -95,4 +95,4 @@ const JobCardPreview = ({ job }) => {
   );
 };
 
-export default JobCardPreview;
+export default Card;

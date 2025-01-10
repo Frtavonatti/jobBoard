@@ -11,4 +11,13 @@ const getJobs = async () => {
   }
 };
 
-export default { getJobs };
+const createJob = async (newJob) => {
+  try {
+    const response = await axios.post(baseUrl, newJob)
+    return response.data
+  } catch (error) {
+    console.log('Error posting data:', error);
+  }
+}
+
+export default { getJobs, createJob };
