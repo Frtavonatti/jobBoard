@@ -1,7 +1,7 @@
 {
   "jobs": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Software Engineer",
       "company": "Tech Corp",
       "location": "San Francisco, CA",
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Data Scientist",
       "company": "Data Inc",
       "location": "New York, NY",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Product Manager",
       "company": "Innovate LLC",
       "location": "Austin, TX",
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "UX Designer",
       "company": "Creative Solutions",
       "location": "Seattle, WA",

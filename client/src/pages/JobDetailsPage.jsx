@@ -4,8 +4,8 @@ import { useJobContext } from "../context/JobContext";
 const JobDetailsPage = () => {
   // TO-DO: Implement method to give persistent data to the JobDetailsPage component
   const [{ jobs }] = useJobContext();
-  const id = Number(useParams().id);
-  const job = jobs.find((job) => Number(job.id) === id);
+  const id = useParams().id;
+  const job = jobs.find((job) => job.id === id);
 
   if (!job) {
     return <h1>Job not found</h1>;
@@ -51,7 +51,7 @@ const JobDetailsPage = () => {
             Qualifications and Requirements
           </h2>
           <ul className="list-inside list-disc pl-5">
-            {job.requirements.map((requirement, index) => (
+            {job.requirements && job.requirements.map((requirement, index) => (
               <li key={index} className="mb-1 text-lg">
                 {requirement}
               </li>
@@ -62,7 +62,7 @@ const JobDetailsPage = () => {
         <div>
           <h2 className="mb-2 text-2xl font-semibold">Job Functions</h2>
           <ul className="list-inside list-disc pl-5">
-            {job.tasks.map((task, index) => (
+            {job.tasks && job.tasks.map((task, index) => (
               <li key={index} className="mb-1 text-lg">
                 {task}
               </li>
