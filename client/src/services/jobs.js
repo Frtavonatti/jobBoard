@@ -20,4 +20,13 @@ const createJob = async (newJob) => {
   }
 }
 
-export default { getJobs, createJob };
+const deleteJob = async (id) => {
+  try {
+    const response = axios.delete(`${baseUrl}/${id}`)
+    return response.data
+  } catch (error) {
+    console.log('Error deleting data:', error);
+  }
+}
+
+export default { getJobs, createJob, deleteJob };

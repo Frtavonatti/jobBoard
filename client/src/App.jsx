@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { NotificationProvider } from "./context/NotificationContext";
 import { JobProvider } from "./context/JobContext";
 import { useState, useEffect } from "react";
 import JobListPage from "./pages/JobListPage";
 import JobDetailsPage from "./pages/JobDetailsPage";
 import NewJobForm from "./pages/NewJobForm";
 import Header from "./components/Header";
+import Notification from "./components/Notification";
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -22,14 +24,17 @@ function App() {
 
   return (
     <Router>
-      <JobProvider>
-        <Header handleTheme={handleTheme} />
-        <Routes>
-          <Route path="/" element={<JobListPage />} />
-          <Route path="/jobs/:id" element={<JobDetailsPage />} />
-          <Route path="/new" element={<NewJobForm />} />
-        </Routes>
-      </JobProvider>
+      <NotificationProvider>
+        <JobProvider>
+          <Header handleTheme={handleTheme} />
+          <Notification />
+          <Routes>
+            <Route path="/" element={<JobListPage />} />
+            <Route path="/jobs/:id" element={<JobDetailsPage />} />
+            <Route path="/new" element={<NewJobForm />} />
+          </Routes>
+        </JobProvider>
+      </NotificationProvider>
     </Router>
   );
 }
