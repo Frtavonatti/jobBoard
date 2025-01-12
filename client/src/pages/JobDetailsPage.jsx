@@ -51,22 +51,24 @@ const JobDetailsPage = () => {
             Qualifications and Requirements
           </h2>
           <ul className="list-inside list-disc pl-5">
-            {job.requirements && job.requirements.map((requirement, index) => (
-              <li key={index} className="mb-1 text-lg">
-                {requirement}
-              </li>
-            ))}
+            {job.requirements &&
+              job.requirements.map((requirement, index) => (
+                <li key={index} className="mb-1 text-lg">
+                  {requirement}
+                </li>
+              ))}
           </ul>
         </div>
 
         <div>
           <h2 className="mb-2 text-2xl font-semibold">Job Functions</h2>
           <ul className="list-inside list-disc pl-5">
-            {job.tasks && job.tasks.map((task, index) => (
-              <li key={index} className="mb-1 text-lg">
-                {task}
-              </li>
-            ))}
+            {job.tasks &&
+              job.tasks.map((task, index) => (
+                <li key={index} className="mb-1 text-lg">
+                  {task}
+                </li>
+              ))}
           </ul>
         </div>
       </section>

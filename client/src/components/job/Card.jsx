@@ -1,53 +1,54 @@
 import { Link } from "react-router-dom";
-import { Trash2 } from 'lucide-react'
+import { Trash2 } from "lucide-react";
 import { useJobContext } from "../../context/JobContext";
 import { useNotificationContext } from "../../context/NotificationContext";
-import jobService from '../../services/jobs'
-import IconSection from './IconSection'
+import jobService from "../../services/jobs";
+import IconSection from "./IconSection";
 
 const Card = ({ job }) => {
   const [{ jobs }, dispatch] = useJobContext();
-  const [state, dispatchNotification] = useNotificationContext()
+  const [state, dispatchNotification] = useNotificationContext();
 
   const removeJob = async (id, title) => {
     try {
       await jobService.deleteJob(id);
-      const updatedJobList = jobs.filter(job => job.id !== id);
+      const updatedJobList = jobs.filter((job) => job.id !== id);
       dispatch({ type: "SET_JOBS", payload: updatedJobList });
-      dispatchNotification({ 
-        type: "SHOW_NOTIFICATION", 
-        payload: `Post "${title}" deleted successfully`
+      dispatchNotification({
+        type: "SHOW_NOTIFICATION",
+        payload: `Post "${title}" deleted successfully`,
       });
     } catch (error) {
-      dispatchNotification({ 
-        type: "SHOW_NOTIFICATION", 
-        payload: `Error deleting post: ${error.message}`
+      dispatchNotification({
+        type: "SHOW_NOTIFICATION",
+        payload: `Error deleting post: ${error.message}`,
       });
-      console.error('Failed to delete job:', error);
+      console.error("Failed to delete job:", error);
     }
-  }
+  };
 
   return (
     <div className="mt-6 flex min-w-[320px] flex-col rounded-md border p-4 dark:border-slate-800">
       <div className="flex flex-col">
-
         <div className="flex justify-between">
-          <div className="flex flex-col text-left ml-2 mb-1">
+          <div className="mb-1 ml-2 flex flex-col text-left">
             <h3 className="text-xl font-bold">{job.title}</h3>
             <p>
-              <span className="text-slate-400">{job.company}</span><br />
+              <span className="text-slate-400">{job.company}</span>
+              <br />
               <span className="text-slate-400">{job.location}</span>
             </p>
           </div>
-          <button 
-            className="mb-auto p-1 rounded-lg bg-slate-200 hover:bg-slate-300"
-            onClick={() => removeJob(job.id, job.title)}>
+          <button
+            className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300"
+            onClick={() => removeJob(job.id, job.title)}
+          >
             <Trash2 size={20} />
           </button>
         </div>
       </div>
 
-      <IconSection job={job}/>
+      <IconSection job={job} />
 
       <div className="m-2">
         We are looking for a dedicated {job.title} to {job.description}
@@ -60,7 +61,6 @@ const Card = ({ job }) => {
           </button>
         </Link>
       </div>
-
     </div>
   );
 };

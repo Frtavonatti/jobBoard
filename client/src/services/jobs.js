@@ -13,20 +13,20 @@ const getJobs = async () => {
 
 const createJob = async (newJob) => {
   try {
-    const response = await axios.post(baseUrl, newJob)
-    return response.data
+    const response = await axios.post(baseUrl, newJob);
+    return response.data;
   } catch (error) {
-    console.log('Error posting data:', error);
+    console.log("Error posting data:", error);
   }
-}
+};
 
 const deleteJob = async (id) => {
   try {
-    const response = axios.delete(`${baseUrl}/${id}`)
-    return response.data
+    const response = axios.delete(`${baseUrl}/${id}`);
+    return response.data;
   } catch (error) {
-    console.log('Error deleting data:', error);
+    console.log("Error deleting data:", error);
   }
-}
+};
 
 export default { getJobs, createJob, deleteJob };

@@ -2,10 +2,10 @@ const FormInput = ({ label, type = "text", ...props }) => {
   return (
     <label className="block">
       {label}
-      <input 
+      <input
         type={type}
-        className="input input-bordered mt-1 w-full" 
-        {...props} 
+        className="input input-bordered mt-1 w-full"
+        {...props}
       />
     </label>
   );

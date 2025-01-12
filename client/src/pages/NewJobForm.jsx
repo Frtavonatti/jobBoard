@@ -1,27 +1,29 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
-import jobService from '../services/jobs'
-import FormInput from '../components/form/FormInput';
-import FormSelect from '../components/form/FormSelect';
-import FormTextArea from '../components/form/FormTextArea';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import jobService from "../services/jobs";
+import { useNotificationContext } from "../context/NotificationContext";
+import FormInput from "../components/form/FormInput";
+import FormSelect from "../components/form/FormSelect";
+import FormTextArea from "../components/form/FormTextArea";
 
 const NewJobForm = () => {
-  const navigate = useNavigate()
+  const [state, dispatchNotification] = useNotificationContext();
+  const navigate = useNavigate();
 
   const initialState = {
-    title: '',
-    company: '',
-    location: '',
-    applicationUrl: '',
-    employmentType: 'Full-time',
-    seniority: 'Entry Level',
-    salary: '',
-    description: '',
-    summary: '',
-    requirements: '',
-    tasks: '',
-    datePosted: new Date().toISOString().split('T')[0]
-  }
+    title: "",
+    company: "",
+    location: "",
+    applicationUrl: "",
+    employmentType: "Full-time",
+    seniority: "Entry Level",
+    salary: "",
+    description: "",
+    summary: "",
+    requirements: "",
+    tasks: "",
+    datePosted: new Date().toISOString().split("T")[0],
+  };
 
   const [formData, setFormData] = useState(initialState);
 
@@ -29,89 +31,113 @@ const NewJobForm = () => {
   const jobTypes = ["Full-time", "Part-time", "Internship"];
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const addJob = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      await jobService.createJob(formData)
-      navigate('/');
+      await jobService.createJob(formData);
+      dispatchNotification({
+        type: "SHOW_NOTIFICATION",
+        payload: `Post "${formData.title}" created successfully`,
+      });
+      navigate("/");
     } catch (error) {
-      console.error('Error creating job:', error);
+      dispatchNotification({
+        type: "SHOW_NOTIFICATION",
+        payload: `Error deleting post: ${error.message}`,
+      });
+      console.error("Error creating job:", error);
     }
-  }
+  };
 
   return (
     <div className="px-8">
       <h3 className="mt-8 text-2xl font-bold">New Listing</h3>
-      <form type="submit" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <FormInput 
+      <form
+        type="submit"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        <FormInput
           label="Title"
           name="title"
-          value={formData.title} 
-          onChange={handleChange} />
+          value={formData.title}
+          onChange={handleChange}
+        />
 
-        <FormInput 
+        <FormInput
           label="Company Name"
           name="company"
           value={formData.company}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <FormInput 
+        <FormInput
           label="Location"
           name="location"
           value={formData.location}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <FormInput 
+        <FormInput
           label="Application URL"
           name="applicationUrl"
           value={formData.applicationUrl}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <FormSelect 
+        <FormSelect
           label="Type"
           name="employmentType"
           options={jobTypes}
           value={formData.employmentType}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <FormSelect 
+        <FormSelect
           label="Experience Level"
           name="seniority"
           options={experienceLevels}
           value={formData.seniority}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <FormInput 
+        <FormInput
           label="Salary"
           name="salary"
           value={formData.salary}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <FormTextArea 
+        <FormTextArea
           label="Summary"
           name="summary"
           value={formData.summary}
-          onChange={handleChange} />
+          onChange={handleChange}
+        />
 
-        <FormTextArea 
+        <FormTextArea
           label="Full Description"
           name="description"
           value={formData.description}
-          onChange={handleChange} />
-        
+          onChange={handleChange}
+        />
+
         <div className="col-span-1 mt-4 flex justify-end gap-2 sm:col-span-2 lg:col-span-3">
-          <button className="btn" type="button">Show preview</button>
-          <button 
+          <button className="btn" type="button">
+            Show preview
+          </button>
+          <button
             onClick={addJob}
-            className="btn dark:bg-slate-100 dark:text-slate-800" type="submit">
+            className="btn dark:bg-slate-100 dark:text-slate-800"
+            type="submit"
+          >
             Save
           </button>
         </div>

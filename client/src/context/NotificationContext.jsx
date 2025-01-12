@@ -8,13 +8,13 @@ const notificationReducer = (state, action) => {
       return {
         ...state,
         message: action.payload,
-        visible: true
+        visible: true,
       };
     case "HIDE_NOTIFICATION":
       return {
         ...state,
-        message: '',
-        visible: false
+        message: "",
+        visible: false,
       };
     default:
       return state;
@@ -23,7 +23,7 @@ const notificationReducer = (state, action) => {
 
 export const NotificationProvider = ({ children }) => {
   const [state, dispatch] = useReducer(notificationReducer, {
-    message: '',
+    message: "",
     visible: false,
   });
 
@@ -37,7 +37,9 @@ export const NotificationProvider = ({ children }) => {
 export const useNotificationContext = () => {
   const context = useContext(NotificationContext);
   if (!context) {
-    throw new Error("useNotificationContext must be used within a NotificationProvider");
+    throw new Error(
+      "useNotificationContext must be used within a NotificationProvider",
+    );
   }
   return context;
 };
