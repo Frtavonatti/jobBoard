@@ -6,8 +6,8 @@ import FormSelect from '../components/form/FormSelect';
 import FormTextArea from '../components/form/FormTextArea';
 
 const NewJobForm = () => {
-  const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];
-  const jobTypes = ["Full-time", "Part-time", "Internship"];
+  const navigate = useNavigate()
+
   const initialState = {
     title: '',
     company: '',
@@ -23,8 +23,10 @@ const NewJobForm = () => {
     datePosted: new Date().toISOString().split('T')[0]
   }
 
-  const navigate = useNavigate()
   const [formData, setFormData] = useState(initialState);
+
+  const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];
+  const jobTypes = ["Full-time", "Part-time", "Internship"];
 
   const handleChange = (e) => {
     const { name, value } = e.target
