@@ -42,35 +42,39 @@ const JobDetailsPage = () => {
       </section>
 
       <section className="mb-6 px-8">
-        <p className="mb-4 text-lg">
-          <strong>Description:</strong> {job.description}
-        </p>
+        {job.description &&  
+          <p className="mb-4 text-lg">
+            <strong>Description:</strong> {job.description}
+          </p>
+        }
 
-        <div className="mb-4">
-          <h2 className="mb-2 text-2xl font-semibold">
-            Qualifications and Requirements
-          </h2>
-          <ul className="list-inside list-disc pl-5">
-            {job.requirements &&
-              job.requirements.map((requirement, index) => (
-                <li key={index} className="mb-1 text-lg">
-                  {requirement}
-                </li>
-              ))}
-          </ul>
-        </div>
+        {job.requirements && (
+          <div className="mb-4">
+            <h2 className="mb-2 text-2xl font-semibold">
+              Qualifications and Requirements
+            </h2>
+            <ul className="list-inside list-disc pl-5">
+                {job.requirements.map((requirement, index) => (
+                  <li key={index} className="mb-1 text-lg">
+                    {requirement}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
 
-        <div>
-          <h2 className="mb-2 text-2xl font-semibold">Job Functions</h2>
-          <ul className="list-inside list-disc pl-5">
-            {job.tasks &&
-              job.tasks.map((task, index) => (
-                <li key={index} className="mb-1 text-lg">
-                  {task}
-                </li>
-              ))}
-          </ul>
-        </div>
+        {job.tasks && (
+          <div>
+            <h2 className="mb-2 text-2xl font-semibold">Job Functions</h2>
+            <ul className="list-inside list-disc pl-5">
+                {job.tasks.map((task, index) => (
+                  <li key={index} className="mb-1 text-lg">
+                    {task}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
       </section>
     </div>
   );

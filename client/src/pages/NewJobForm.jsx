@@ -1,14 +1,14 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import jobService from "../services/jobs";
+import { useState } from "react";
 import { useNotificationContext } from "../context/NotificationContext";
-import JobForm from "../components/JobForm";
+import jobService from "../services/jobs";
+import JobForm from "../components/form/JobForm";
+import FormActions from "../components/form/FormActions";
 
 const NewJobForm = () => {
   const [, dispatchNotification] = useNotificationContext();
   const navigate = useNavigate();
-
-  const initialState = {
+  const [formData, setFormData] = useState({
     title: "",
     company: "",
     location: "",
@@ -21,9 +21,7 @@ const NewJobForm = () => {
     requirements: "",
     tasks: "",
     datePosted: new Date().toISOString().split("T")[0],
-  };
-
-  const [formData, setFormData] = useState(initialState);
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +31,7 @@ const NewJobForm = () => {
     });
   };
 
-  const addJob = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await jobService.createJob(formData);
@@ -54,13 +52,8 @@ const NewJobForm = () => {
   return (
     <div className="px-8 mb-6">
       <h3 className="m-8 text-2xl font-bold">New Listing</h3>
-
-      <JobForm 
-      formData={formData}
-      onSubmit={addJob}
-      handleChange={handleChange}
-      />
-
+      <JobForm formData={formData} handleChange={handleChange} />
+      <FormActions formData={formData} onSubmit={handleSubmit} />
     </div>
   );
 };

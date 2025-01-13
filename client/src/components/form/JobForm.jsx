@@ -1,10 +1,9 @@
-import FormInput from "./form/FormInput";
-import FormSelect from "./form/FormSelect";
-import FormTextArea from "./form/FormTextArea";
-import FormActions from "./form/FormActions";
+import FormInput from "./FormInput";
+import FormSelect from "./FormSelect";
+import FormTextArea from "./FormTextArea";
 
-const JobForm = ({ formData, handleChange, addJob }) => {
-  const experienceLevels = ["Enthry Level", "Mid Level", "Senior Level"];
+const JobForm = ({ formData, handleChange }) => {
+  const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];
   const jobTypes = ["Full-time", "Part-time", "Internship"];
 
   return (
@@ -75,8 +74,6 @@ const JobForm = ({ formData, handleChange, addJob }) => {
       value={formData.description}
       onChange={handleChange}
     />
-
-    <FormActions addJob={addJob} formData={formData} />
   </form>
   )
 }
