@@ -7,23 +7,25 @@ import IconSection from "./IconSection";
 
 const Card = ({ job }) => {
   const [{ jobs }, dispatch] = useJobContext();
-  const [state, dispatchNotification] = useNotificationContext();
+  const [, dispatchNotification] = useNotificationContext();
 
   const removeJob = async (id, title) => {
-    try {
-      await jobService.deleteJob(id);
-      const updatedJobList = jobs.filter((job) => job.id !== id);
-      dispatch({ type: "SET_JOBS", payload: updatedJobList });
-      dispatchNotification({
-        type: "SHOW_NOTIFICATION",
-        payload: `Post "${title}" deleted successfully`,
-      });
-    } catch (error) {
-      dispatchNotification({
-        type: "SHOW_NOTIFICATION",
-        payload: `Error deleting post: ${error.message}`,
-      });
-      console.error("Failed to delete job:", error);
+    if (window.confirm(`Are you sure you want to delete the job post: "${title}"?`)) {
+      try {
+        await jobService.deleteJob(id);
+        const updatedJobList = jobs.filter((job) => job.id !== id);
+        dispatch({ type: "SET_JOBS", payload: updatedJobList });
+        dispatchNotification({
+          type: "SHOW_NOTIFICATION",
+          payload: `Post "${title}" deleted successfully`,
+        });
+      } catch (error) {
+        dispatchNotification({
+          type: "SHOW_NOTIFICATION",
+          payload: `Error deleting post: ${error.message}`,
+        });
+        console.error("Failed to delete job:", error);
+      }
     }
   };
 
@@ -43,7 +45,7 @@ const Card = ({ job }) => {
             className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300"
             onClick={() => removeJob(job.id, job.title)}
           >
-            <Trash2 size={20} />
+            <Trash2 size={20} className="dark:text-slate-600"/>
           </button>
         </div>
       </div>

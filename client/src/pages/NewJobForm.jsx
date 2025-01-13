@@ -5,9 +5,10 @@ import { useNotificationContext } from "../context/NotificationContext";
 import FormInput from "../components/form/FormInput";
 import FormSelect from "../components/form/FormSelect";
 import FormTextArea from "../components/form/FormTextArea";
+import Card from "../components/job/Card";
 
 const NewJobForm = () => {
-  const [state, dispatchNotification] = useNotificationContext();
+  const [, dispatchNotification] = useNotificationContext();
   const navigate = useNavigate();
 
   const initialState = {
@@ -26,6 +27,7 @@ const NewJobForm = () => {
   };
 
   const [formData, setFormData] = useState(initialState);
+  const [isVisible, setIsVisible] = useState(false)
 
   const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];
   const jobTypes = ["Full-time", "Part-time", "Internship"];
@@ -40,7 +42,6 @@ const NewJobForm = () => {
 
   const addJob = async (event) => {
     event.preventDefault();
-
     try {
       await jobService.createJob(formData);
       dispatchNotification({
@@ -58,7 +59,7 @@ const NewJobForm = () => {
   };
 
   return (
-    <div className="px-8">
+    <div className="px-8 mb-6">
       <h3 className="mt-8 text-2xl font-bold">New Listing</h3>
       <form
         type="submit"
@@ -130,8 +131,8 @@ const NewJobForm = () => {
         />
 
         <div className="col-span-1 mt-4 flex justify-end gap-2 sm:col-span-2 lg:col-span-3">
-          <button className="btn" type="button">
-            Show preview
+          <button className="btn" type="button" onClick={() => { setIsVisible(!isVisible) }}>
+            { isVisible ? 'Hide' : 'Show Preview' }
           </button>
           <button
             onClick={addJob}
@@ -142,6 +143,8 @@ const NewJobForm = () => {
           </button>
         </div>
       </form>
+
+      {isVisible && <Card job={formData}/>}
     </div>
   );
 };
