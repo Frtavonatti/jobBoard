@@ -35,9 +35,8 @@ const Card = ({ job }) => {
         <div className="flex justify-between">
           <div className="mb-1 ml-2 flex flex-col text-left">
             <h3 className="text-xl font-bold">{job.title}</h3>
-            <p>
+            <p className="flex flex-col">
               <span className="text-slate-400">{job.company}</span>
-              <br />
               <span className="text-slate-400">{job.location}</span>
             </p>
           </div>
@@ -58,7 +57,7 @@ const Card = ({ job }) => {
 
       <div className="mt-auto flex justify-end">
         <Link to={`/jobs/${job.id}`}>
-          <button className="btn dark:bg-slate-100 dark:text-slate-800">
+          <button className="btn">
             View More
           </button>
         </Link>

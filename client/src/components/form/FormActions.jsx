@@ -7,14 +7,14 @@ const FormActions = ({ formData, onSubmit }) => {
   return (
     <>
       {isVisible && <Card job={formData} />}
-      
+
       <div className="col-span-1 mt-4 flex justify-end gap-2 sm:col-span-2 lg:col-span-3">
         <button className="btn" type="button" onClick={() => { setIsVisible(!isVisible) }}>
           {isVisible ? 'Hide' : 'Show Preview'}
         </button>
         <button
           onClick={onSubmit}
-          className="btn dark:bg-slate-100 dark:text-slate-800"
+          className="btn btn-primary"
           type="submit"
         >
           Save
