@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { NotificationProvider } from "./context/NotificationContext";
 import { JobProvider } from "./context/JobContext";
 import { useState, useEffect } from "react";
+import LoginPage from "./pages/LoginPage";
 import JobListPage from "./pages/JobListPage";
 import JobDetailsPage from "./pages/JobDetailsPage";
 import NewJobForm from "./pages/NewJobForm";
@@ -32,6 +33,7 @@ function App() {
             <Route path="/" element={<JobListPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />
             <Route path="/new" element={<NewJobForm />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </JobProvider>
       </NotificationProvider>

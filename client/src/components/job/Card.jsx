@@ -41,10 +41,10 @@ const Card = ({ job }) => {
             </p>
           </div>
           <button
-            className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300"
+            className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300 dark:bg-slate-600"
             onClick={() => removeJob(job.id, job.title)}
           >
-            <Trash2 size={20} className="dark:text-slate-600"/>
+            <Trash2 size={20} className="dark:text-slate-100"/>
           </button>
         </div>
       </div>
