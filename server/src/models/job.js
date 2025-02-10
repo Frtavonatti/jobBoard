@@ -11,7 +11,9 @@ const jobSchema = new mongoose.Schema({
   salary: { type: Number },
   datePosted: { type: Date },
   requirements: { type: [String] },
-  tasks: { type: [String] }
+  tasks: { type: [String] },
+  company_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
+  applicants: { type: [mongoose.Schema.Types.ObjectId], ref: 'Candidate' }
 })
 
 jobSchema.set('toJSON', {
