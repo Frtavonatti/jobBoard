@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const jobSchema = new mongoose.Schema({
   id: { type: String },
+  company_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
   title: { type: String, required: true },
   company: { type: String },
   location: { type: String },
@@ -12,7 +13,6 @@ const jobSchema = new mongoose.Schema({
   datePosted: { type: Date },
   requirements: { type: [String] },
   tasks: { type: [String] },
-  company_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
   applicants: { type: [mongoose.Schema.Types.ObjectId], ref: 'Candidate' }
 })
 

@@ -9,15 +9,15 @@ const userSchema = new mongoose.Schema({
 const companySchema = new mongoose.Schema({
   user_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
   name: { type: String, required: true },
-  location: { type: String, required: true },
   industry: { type: String, required: true }
+  // location: { type: String, required: true },
 })
 
 const candidateSchema = new mongoose.Schema({
   user_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
-  resume: { type: String, required: true }
+  // resume: { type: String, required: true }
 })
 
 userSchema.set('toJSON', {
