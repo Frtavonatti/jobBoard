@@ -4,7 +4,7 @@
 
 - [x] Initialize React app using `create-react-app` or `Vite`.
 - [x] Install dependencies: `axios`, `react-router-dom`, `context`, `tailwindcss`.
-- [ ] Set up the project structure:
+- [x] Set up the project structure:
   - [x] `components/`
   - [x] `pages/`
   - [x] `context/`
@@ -18,7 +18,7 @@
 ## **Authentication Pages**
 
 - [ ] Build the **Login** page:
-  - [X] Form for email and password.
+  - [x] Form for email and password.
   - [ ] Call `/auth/login` API and store token.
 - [ ] Build the **Register** page:
   - [ ] Form for name, email, password, and role selection (user or company).

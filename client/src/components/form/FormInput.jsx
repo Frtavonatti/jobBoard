@@ -1,6 +1,6 @@
 const FormInput = ({ label, type = "text", ...props }) => {
   return (
-    <label className="block">
+    <label className="block font-sans font-semibold text-sm">
       {label}
       <input
         type={type}

@@ -1,3 +1,5 @@
+import FormInput from "../components/form/FormInput"
+
 const LoginPage = () => {
   return (
     <>
@@ -15,48 +17,20 @@ const LoginPage = () => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form action="#" method="POST" className="space-y-6">
-            <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium">
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
-              </div>
+            <div className="mt-2">
+              <FormInput label="Email" name="email" type="email" autoComplete="email" required/>
             </div>
 
-            <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm/6 font-medium">
-                  Password
-                </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+            <div className="mt-2">
+              <FormInput label="Password" name="password" type="password" autoComplete="password" required/>
+              <div className="mt-2 mr-2">
+                <a href="#" className="block text-right font-semibold text-sm text-indigo-600 hover:text-indigo-500">
                     Forgot password?
-                  </a>
-                </div>
-              </div>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  autoComplete="current-password"
-                  className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                />
+                </a>
               </div>
             </div>
 
-            <div>
-              <button type="submit" className="btn btn-primary">Sign in</button>
-            </div>
+            <button type="submit" className="btn btn-primary">Sign in</button>
           </form>
 
           <p className="mt-10 text-center text-sm/6">

@@ -4,6 +4,8 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const app = express()
 
+const loginRouter = require('./src/controllers/login')
+const signInRouter = require('./src/controllers/signIn')
 const jobsRouter = require('./src/controllers/jobs')
 const logger = require('./src/utils/middleware')
 
@@ -24,5 +26,7 @@ mongoose.connect(config.MONGO_URI)
 
 // Routes
 app.use('/api/jobs', jobsRouter)
+app.use('/api/login', loginRouter)
+app.use('/api/register', signInRouter)
 
 module.exports = app
