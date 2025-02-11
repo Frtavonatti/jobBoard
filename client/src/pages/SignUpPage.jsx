@@ -1,30 +1,30 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import { signup } from "../services/user"
-import FormInput from "../components/form/FormInput"
-import FormSelect from "../components/form/FormSelect"
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { signup } from "../services/user";
+import FormInput from "../components/form/FormInput";
+import FormSelect from "../components/form/FormSelect";
 
 const SignUpPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [role, setRole] = useState('candidate')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("candidate");
 
   // TODO: Implement Error Handling Notifications
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
       console.log(email, password, role);
-      
+
       const data = await signup(email, password, role);
-      console.log('SignUp successful:', data);
+      console.log("SignUp successful:", data);
       return data;
     } catch (error) {
-      console.error('SignUp failed:', error);
+      console.error("SignUp failed:", error);
     }
   };
 
   return (
-    <>
+    <div className="mt-28 min-h-full rounded-lg border border-solid border-white px-6 py-12 md:mx-28 lg:px-8">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight">
           Create an account
@@ -57,25 +57,31 @@ const SignUpPage = () => {
             </div>
 
             <FormSelect
-              options={['candidate', 'company']}
+              options={["candidate", "company"]}
               label="Role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             />
 
-            <button type="submit" className="btn btn-primary"> Register </button>
+            <button type="submit" className="btn btn-primary">
+              {" "}
+              Register{" "}
+            </button>
           </form>
 
           <p className="mt-10 text-center text-sm/6">
-            Already have an account?{' '}
-              <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                Log in
-              </Link>
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-semibold text-indigo-600 hover:text-indigo-500"
+            >
+              Log in
+            </Link>
           </p>
         </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default SignUpPage
+export default SignUpPage;

@@ -32,11 +32,11 @@ const createJob = async (newJob) => {
 const updateJob = async (id, updatedJob) => {
   try {
     const response = axios.put(`${baseUrl}/${id}`, updatedJob);
-    return response.data
+    return response.data;
   } catch (error) {
     console.log("Error updating data:", error);
   }
-}
+};
 
 const deleteJob = async (id) => {
   try {

@@ -55,11 +55,11 @@ const JobDetailsPage = () => {
       </section>
 
       <section className="mb-6 px-8">
-        {job.description &&  
+        {job.description && (
           <p className="mb-4 text-lg">
             <strong>Description:</strong> {job.description}
           </p>
-        }
+        )}
 
         {job.requirements && (
           <div className="mb-4">
@@ -67,11 +67,11 @@ const JobDetailsPage = () => {
               Qualifications and Requirements
             </h2>
             <ul className="list-inside list-disc pl-5">
-                {job.requirements.map((requirement, index) => (
-                  <li key={index} className="mb-1 text-lg">
-                    {requirement}
-                  </li>
-                ))}
+              {job.requirements.map((requirement, index) => (
+                <li key={index} className="mb-1 text-lg">
+                  {requirement}
+                </li>
+              ))}
             </ul>
           </div>
         )}
@@ -80,11 +80,11 @@ const JobDetailsPage = () => {
           <div>
             <h2 className="mb-2 text-2xl font-semibold">Job Functions</h2>
             <ul className="list-inside list-disc pl-5">
-                {job.tasks.map((task, index) => (
-                  <li key={index} className="mb-1 text-lg">
-                    {task}
-                  </li>
-                ))}
+              {job.tasks.map((task, index) => (
+                <li key={index} className="mb-1 text-lg">
+                  {task}
+                </li>
+              ))}
             </ul>
           </div>
         )}

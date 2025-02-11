@@ -26,7 +26,7 @@ function App() {
   };
 
   // Authentication
-  const [ user, setUser ] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -47,7 +47,7 @@ function App() {
         </Routes>
       ) : (
         <JobProvider>
-          <Header handleTheme={handleTheme} user={user}/>
+          <Header handleTheme={handleTheme} user={user} />
           <Routes>
             <Route path="/" element={<JobListPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />

@@ -1,6 +1,6 @@
-import { Info } from "lucide-react"
-import { useEffect } from "react"
-import { useNotificationContext } from "../context/NotificationContext"
+import { Info } from "lucide-react";
+import { useEffect } from "react";
+import { useNotificationContext } from "../context/NotificationContext";
 
 const Notification = () => {
   const [state, dispatch] = useNotificationContext();
@@ -19,7 +19,7 @@ const Notification = () => {
   return (
     <div
       role={`alert`}
-      className="alert fixed top-0 left-1/2 transform -translate-x-1/2 m-2 lg:p-6 p-10"
+      className="alert fixed left-1/2 top-0 m-2 -translate-x-1/2 transform p-10 lg:p-6"
       style={{ zIndex: 1000 }}
     >
       <Info />
@@ -28,4 +28,4 @@ const Notification = () => {
   );
 };
 
-export default Notification
+export default Notification;

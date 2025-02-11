@@ -1,11 +1,11 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import { login } from "../services/user"
-import FormInput from "../components/form/FormInput"
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { login } from "../services/user";
+import FormInput from "../components/form/FormInput";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // TODO: Implement Error Handling Messages
   const handleLogin = async (event) => {
@@ -15,12 +15,12 @@ const LoginPage = () => {
       // console.log('Login successful:', data);
       return data;
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error("Login failed:", error);
     }
   };
 
   return (
-    <>
+    <div className="mt-28 min-h-full rounded-lg border border-solid border-white px-6 py-12 md:mx-28 lg:px-8">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight">
           Sign in to your account
@@ -50,27 +50,34 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <div className="mt-2 mr-2">
-                <a href="#" className="block text-right font-semibold text-sm text-indigo-600 hover:text-indigo-500">
+              <div className="mr-2 mt-2">
+                <a
+                  href="#"
+                  className="block text-right text-sm font-semibold text-indigo-600 hover:text-indigo-500"
+                >
                   Forgot password?
                 </a>
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary">Sign in</button>
+            <button type="submit" className="btn btn-primary">
+              Sign in
+            </button>
           </form>
 
           <p className="mt-10 text-center text-sm/6">
-            Not a member?{' '}
-
-            <Link to="/signup" className="font-semibold text-indigo-600 hover:text-indigo-500">
+            Not a member?{" "}
+            <Link
+              to="/signup"
+              className="font-semibold text-indigo-600 hover:text-indigo-500"
+            >
               Register
             </Link>
           </p>
         </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default LoginPage
+export default LoginPage;

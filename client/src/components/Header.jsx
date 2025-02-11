@@ -17,7 +17,7 @@ const Header = ({ handleTheme, user }) => {
         <ToggleThemeIcon handleTheme={handleTheme} />
         <details className="dropdown">
           <summary className="btn ml-4">
-            { user.email }
+            {user.email}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="ml-1 inline-block h-4 w-4"

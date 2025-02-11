@@ -50,7 +50,7 @@ const NewJobForm = () => {
   };
 
   return (
-    <div className="px-8 mb-6">
+    <div className="mb-6 px-8">
       <h3 className="m-8 text-2xl font-bold">New Listing</h3>
       <JobForm formData={formData} handleChange={handleChange} />
       <FormActions formData={formData} onSubmit={handleSubmit} />

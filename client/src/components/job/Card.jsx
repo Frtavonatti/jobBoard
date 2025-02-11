@@ -10,7 +10,11 @@ const Card = ({ job }) => {
   const [, dispatchNotification] = useNotificationContext();
 
   const removeJob = async (id, title) => {
-    if (window.confirm(`Are you sure you want to delete the job post: "${title}"?`)) {
+    if (
+      window.confirm(
+        `Are you sure you want to delete the job post: "${title}"?`,
+      )
+    ) {
       try {
         await jobService.deleteJob(id);
         const updatedJobList = jobs.filter((job) => job.id !== id);
@@ -44,7 +48,7 @@ const Card = ({ job }) => {
             className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300 dark:bg-slate-600"
             onClick={() => removeJob(job.id, job.title)}
           >
-            <Trash2 size={20} className="dark:text-slate-100"/>
+            <Trash2 size={20} className="dark:text-slate-100" />
           </button>
         </div>
       </div>
@@ -57,9 +61,7 @@ const Card = ({ job }) => {
 
       <div className="mt-auto flex justify-end">
         <Link to={`/jobs/${job.id}`}>
-          <button className="btn">
-            View More
-          </button>
+          <button className="btn">View More</button>
         </Link>
       </div>
     </div>
