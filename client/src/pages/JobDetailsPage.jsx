@@ -1,11 +1,24 @@
 import { useParams } from "react-router-dom";
-import { useJobContext } from "../context/JobContext";
+import { useState, useEffect } from "react";
+import jobService from "../services/jobs";
 
 const JobDetailsPage = () => {
-  // TO-DO: Implement method to give persistent data to the JobDetailsPage component
-  const [{ jobs }] = useJobContext();
-  const id = useParams().id;
-  const job = jobs.find((job) => job.id === id);
+  const { id } = useParams();
+  const [job, setJob] = useState(null);
+
+  useEffect(() => {
+    const fetchJob = async () => {
+      try {
+        const fetchedJob = await jobService.getOneJob(id);
+        setJob(fetchedJob);
+      } catch (error) {
+        console.error("Failed to fetch job:", error);
+        setJob(null);
+      }
+    };
+
+    fetchJob();
+  }, [id]);
 
   if (!job) {
     return <h1>Job not found</h1>;

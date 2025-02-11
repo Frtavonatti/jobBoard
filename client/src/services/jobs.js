@@ -11,6 +11,15 @@ const getJobs = async () => {
   }
 };
 
+const getOneJob = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching job:", error);
+  }
+};
+
 const createJob = async (newJob) => {
   try {
     const response = await axios.post(baseUrl, newJob);
@@ -38,4 +47,4 @@ const deleteJob = async (id) => {
   }
 };
 
-export default { getJobs, createJob, updateJob, deleteJob };
+export default { getJobs, getOneJob, createJob, updateJob, deleteJob };
