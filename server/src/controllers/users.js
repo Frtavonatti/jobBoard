@@ -13,6 +13,7 @@ userRouter.post('/login', async (req, res) => {
     : await bcrypt.compare(password, user.password)
   
   if (!(user && passwordCorrect)) {
+    console.log('invalid email or password');
     return res.status(401).json({ error: 'invalid email or password' })
   }
   
@@ -28,7 +29,7 @@ userRouter.post('/login', async (req, res) => {
 })
 
 // Sign up
-userRouter.post('/', async (req, res) => {
+userRouter.post('/signup', async (req, res) => {
   const { email, password, role } = req.body
 
   const userExist = await User.findOne({ email })

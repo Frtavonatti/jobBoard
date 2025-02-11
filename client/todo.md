@@ -8,7 +8,6 @@
   - [x] `components/`
   - [x] `pages/`
   - [x] `context/`
-  - [ ] `utils/`
 
 ## **Global State Management**
 
@@ -17,12 +16,12 @@
 
 ## **Authentication Pages**
 
-- [ ] Build the **Login** page:
+- [x] Build the **Login** page:
   - [x] Form for email and password.
-  - [ ] Call `/auth/login` API and store token.
-- [ ] Build the **Register** page:
-  - [ ] Form for name, email, password, and role selection (user or company).
-  - [ ] Call `/auth/register` API.
+  - [x] Call `/user/login` API and store token.
+- [x] Build the **Register** page:
+  - [x] Form for name, email, password, and role selection (user or company).
+  - [x] Call `/user/register` API.
 
 ## **User Dashboard**
 
@@ -49,7 +48,7 @@
 - [x] Create a **Navbar**:
   - [ ] Links to home, login/register, dashboard, and logout.
   - [ ] Update dynamically based on authentication state.
-- [ ] Create a **Footer** with basic links and branding.
+- [x] Create a **Footer** with basic links and branding.
 
 ## **Styling and Responsiveness**
 

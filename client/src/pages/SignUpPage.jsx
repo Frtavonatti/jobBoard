@@ -1,21 +1,25 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { login } from "../services/user"
+import { signup } from "../services/user"
 import FormInput from "../components/form/FormInput"
+import FormSelect from "../components/form/FormSelect"
 
-const LoginPage = () => {
+const SignUpPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [role, setRole] = useState('candidate')
 
-  // TODO: Implement Error Handling Messages
-  const handleLogin = async (event) => {
+  // TODO: Implement Error Handling Notifications
+  const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const data = await login(email, password);
-      // console.log('Login successful:', data);
+      console.log(email, password, role);
+      
+      const data = await signup(email, password, role);
+      console.log('SignUp successful:', data);
       return data;
     } catch (error) {
-      console.error('Login failed:', error);
+      console.error('SignUp failed:', error);
     }
   };
 
@@ -23,11 +27,11 @@ const LoginPage = () => {
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight">
-          Sign in to your account
+          Create an account
         </h2>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleLogin} className="space-y-6">
+          <form onSubmit={handleSignUp} className="space-y-6">
             <div className="mt-2">
               <FormInput
                 label="Email"
@@ -50,22 +54,23 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <div className="mt-2 mr-2">
-                <a href="#" className="block text-right font-semibold text-sm text-indigo-600 hover:text-indigo-500">
-                  Forgot password?
-                </a>
-              </div>
             </div>
 
-            <button type="submit" className="btn btn-primary">Sign in</button>
+            <FormSelect
+              options={['candidate', 'company']}
+              label="Role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            />
+
+            <button type="submit" className="btn btn-primary"> Register </button>
           </form>
 
           <p className="mt-10 text-center text-sm/6">
-            Not a member?{' '}
-
-            <Link to="/signup" className="font-semibold text-indigo-600 hover:text-indigo-500">
-              Register
-            </Link>
+            Already have an account?{' '}
+              <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                Log in
+              </Link>
           </p>
         </div>
       </div>
@@ -73,4 +78,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default SignUpPage

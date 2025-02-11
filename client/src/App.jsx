@@ -1,12 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { NotificationProvider } from "./context/NotificationContext";
 import { JobProvider } from "./context/JobContext";
 import { useState, useEffect } from "react";
 import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
 import JobListPage from "./pages/JobListPage";
 import JobDetailsPage from "./pages/JobDetailsPage";
 import NewJobForm from "./pages/NewJobForm";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Notification from "./components/Notification";
 
 function App() {
@@ -34,25 +36,27 @@ function App() {
     }
   }, []);
 
-  if (!user) {
-    return <LoginPage/>
-  }
-  
   return (
-    <Router>
-      <NotificationProvider>
+    <NotificationProvider>
+      <Notification />
+      {!user ? (
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="*" element={<LoginPage />} />
+        </Routes>
+      ) : (
         <JobProvider>
           <Header handleTheme={handleTheme} user={user}/>
-          <Notification />
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<JobListPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />
             <Route path="/new" element={<NewJobForm />} />
           </Routes>
+          <Footer />
         </JobProvider>
-      </NotificationProvider>
-    </Router>
+      )}
+    </NotificationProvider>
   );
 }
 
