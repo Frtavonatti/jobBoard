@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import { logout } from "../services/user";
 import ToggleThemeIcon from "./ui/ToggleThemeIcon";
 import reactLogo from "../assets/react.svg";
 
-const Header = ({ handleTheme }) => {
+const Header = ({ handleTheme, user }) => {
   return (
     <header className="flex items-center justify-between p-2">
       <div className="flex items-center justify-center">
@@ -16,7 +17,7 @@ const Header = ({ handleTheme }) => {
         <ToggleThemeIcon handleTheme={handleTheme} />
         <details className="dropdown">
           <summary className="btn ml-4">
-            Test@test.com
+            { user.email }
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="ml-1 inline-block h-4 w-4"
@@ -35,7 +36,7 @@ const Header = ({ handleTheme }) => {
               <a>My Jobposts</a>
             </li>
             <li>
-              <a>Logout</a>
+              <button onClick={logout}>Logout</button>
             </li>
           </ul>
         </details>

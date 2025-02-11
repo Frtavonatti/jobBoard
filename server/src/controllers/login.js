@@ -14,8 +14,6 @@ loginRouter.post('/', async (req, res) => {
   if (!(user && passwordCorrect)) {
     return res.status(401).json({ error: 'invalid email or password' })
   }
-
-  console.log(user); // delete this line
   
   const userForToken = {
     email: user.email,

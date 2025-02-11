@@ -23,17 +23,32 @@ function App() {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
+  // Authentication
+  const [ user, setUser ] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const formattedUser = JSON.parse(storedUser);
+      setUser(formattedUser);
+    }
+  }, []);
+
+  if (!user) {
+    return <LoginPage/>
+  }
+  
   return (
     <Router>
       <NotificationProvider>
         <JobProvider>
-          <Header handleTheme={handleTheme} />
+          <Header handleTheme={handleTheme} user={user}/>
           <Notification />
           <Routes>
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<JobListPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />
             <Route path="/new" element={<NewJobForm />} />
-            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </JobProvider>
       </NotificationProvider>
