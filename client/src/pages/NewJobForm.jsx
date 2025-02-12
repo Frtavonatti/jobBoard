@@ -5,7 +5,7 @@ import jobService from "../services/jobs";
 import JobForm from "../components/form/JobForm";
 import FormActions from "../components/form/FormActions";
 
-const NewJobForm = () => {
+const NewJobForm = ({ token }) => {
   const [, dispatchNotification] = useNotificationContext();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -33,8 +33,16 @@ const NewJobForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!token) {
+      dispatchNotification({
+        type: "SHOW_NOTIFICATION",
+        payload: "You must be logged in to create a job post",
+      });
+    }
+    
     try {
-      await jobService.createJob(formData);
+      await jobService.createJob(formData, token);
       dispatchNotification({
         type: "SHOW_NOTIFICATION",
         payload: `Post "${formData.title}" created successfully`,
@@ -52,8 +60,16 @@ const NewJobForm = () => {
   return (
     <div className="mb-6 px-8">
       <h3 className="m-8 text-2xl font-bold">New Listing</h3>
-      <JobForm formData={formData} handleChange={handleChange} />
-      <FormActions formData={formData} onSubmit={handleSubmit} />
+      <JobForm 
+        formData={formData} 
+        handleChange={handleChange}
+      />
+      <FormActions 
+        onSubmit={handleSubmit}
+        formData={formData}
+        submitText="Save"
+        onCancel={() => navigate("/")}
+      />
     </div>
   );
 };

@@ -20,9 +20,12 @@ const getOneJob = async (id) => {
   }
 };
 
-const createJob = async (newJob) => {
+const createJob = async (newJob, token) => {
   try {
-    const response = await axios.post(baseUrl, newJob);
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    const response = await axios.post(baseUrl, newJob, config);
     return response.data;
   } catch (error) {
     console.log("Error posting data:", error);

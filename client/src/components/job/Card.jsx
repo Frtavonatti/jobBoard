@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Trash2 } from "lucide-react";
+import { Trash2, Pen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useJobContext } from "../../context/JobContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
@@ -8,6 +9,7 @@ import IconSection from "./IconSection";
 const Card = ({ job }) => {
   const [{ jobs }, dispatch] = useJobContext();
   const [, dispatchNotification] = useNotificationContext();
+  const navigate = useNavigate();
 
   const removeJob = async (id, title) => {
     if (
@@ -44,12 +46,22 @@ const Card = ({ job }) => {
               <span className="text-slate-400">{job.location}</span>
             </p>
           </div>
-          <button
-            className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300 dark:bg-slate-600"
-            onClick={() => removeJob(job.id, job.title)}
-          >
-            <Trash2 size={20} className="dark:text-slate-100" />
-          </button>
+
+          <div className="flex gap-2">
+            <button
+              className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300 dark:bg-slate-600"
+              onClick={() => navigate(`/jobs/${job.id}/edit`)}
+            >
+              <Pen size={20} className="dark:text-slate-100" />
+            </button>
+
+            <button
+              className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300 dark:bg-slate-600"
+              onClick={() => removeJob(job.id, job.title)}
+              >
+              <Trash2 size={20} className="dark:text-slate-100" />
+            </button>
+          </div>
         </div>
       </div>
 

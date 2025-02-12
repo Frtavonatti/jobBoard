@@ -23,30 +23,30 @@
   - [x] Form for name, email, password, and role selection (user or company).
   - [x] Call `/user/register` API.
 
-## **User Dashboard**
+## **User Dashboard (CANDIDATES)**
 
 - [x] Create a **Job Listings** page:
   - [x] Fetch all jobs from `/jobs`.
   - [ ] Add filters (location, salary, experience level, type).
   - [x] Display job cards with summary details (title, company, location).
 - [x] Build the **Job Details** page:
-  - [ ] Fetch job details from `/jobs/:id`.
+  - [x] Fetch job details from `/jobs/:id`.
   - [x] Display job description, requirements, and company details.
   - [ ] Add buttons for liking and applying to jobs.
 
 ## **Company Dashboard**
 
-- [ ] Create the **My Job Posts** page:
+- [x] Create the **My Job Posts** page:
   - [ ] Fetch jobs posted by the company from `/my-jobs`.
-  - [ ] Display job cards with options to edit or delete.
-- [ ] Build the **Create/Edit Job Post** page:
-  - [ ] Form to add or edit job details (title, description, location, salary, experience level, type).
-  - [ ] Call `/jobs` API for creation or updating.
+  - [x] Display job cards with options to edit or delete.
+- [x] Build the **Create/Edit Job Post** page:
+  - [x] Form to add or edit job details (title, description, location, salary, experience level, type).
+  - [x] Call `/jobs` API for creation or updating.
 
 ## **Navigation and Layout**
 
 - [x] Create a **Navbar**:
-  - [ ] Links to home, login/register, dashboard, and logout.
+  - [/] Links to home, login/register, dashboard, and logout.
   - [ ] Update dynamically based on authentication state.
 - [x] Create a **Footer** with basic links and branding.
 
@@ -60,8 +60,8 @@
 ## **Integration with Backend**
 
 - [x] Use `axios` to call backend APIs.
-- [ ] Handle token-based authentication in API requests.
-- [ ] Store user session data in `localStorage` or context.
+- [x] Handle token-based authentication in API requests.
+- [x] Store user session data in `localStorage` or context.
 
 ## **Testing and Debugging**
 

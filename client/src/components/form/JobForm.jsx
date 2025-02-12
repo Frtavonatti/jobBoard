@@ -2,13 +2,14 @@ import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import FormTextArea from "./FormTextArea";
 
-const JobForm = ({ formData, handleChange }) => {
+const JobForm = ({ formData, handleSubmit, handleChange }) => {
   const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];
   const jobTypes = ["Full-time", "Part-time", "Internship"];
 
   return (
     <form
       type="submit"
+      onSubmit={handleSubmit}
       className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
     >
       <FormInput

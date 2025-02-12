@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import jobService from "../services/jobs";
 
 const JobDetailsPage = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [job, setJob] = useState(null);
 
@@ -27,15 +28,21 @@ const JobDetailsPage = () => {
   return (
     <div className="text-start">
       <section className="mb-6 p-8">
-        <div className="mb-4 flex flex-col">
-          <div className="flex items-center gap-2">
-            <p className="text-lg font-semibold">{job.company}</p>
-            <a href="#" className="text-blue-500 hover:underline">
-              Follow
-            </a>
+
+        <div className="flex justify-between items-center mb-4">
+          <div className="mb-4 flex flex-col">
+            <div className="flex items-center gap-2">
+              <p className="text-lg font-semibold">{job.company}</p>
+              <a href="#" className="text-blue-500 hover:underline">
+                Follow
+              </a>
+            </div>
+            <p className="text-sm text-gray-500">{job.datePosted}</p>
           </div>
-          <p className="text-sm text-gray-500">{job.datePosted}</p>
+
+          <button onClick={() => navigate(`/jobs/${id}/edit`)} className="btn">Edit</button>
         </div>
+
 
         <h1 className="mb-2 text-4xl font-bold">{job.title}</h1>
 

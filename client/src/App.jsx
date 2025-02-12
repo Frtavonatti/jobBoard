@@ -7,6 +7,7 @@ import SignUpPage from "./pages/SignUpPage";
 import JobListPage from "./pages/JobListPage";
 import JobDetailsPage from "./pages/JobDetailsPage";
 import NewJobForm from "./pages/NewJobForm";
+import EditJobForm from "./pages/EditJobForm";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Notification from "./components/Notification";
@@ -36,6 +37,11 @@ function App() {
     }
   }, []);
 
+  // Fix this function to handle user authentication
+  if (!user) {
+    return (<LoginPage />);
+  }
+
   return (
     <NotificationProvider>
       <Notification />
@@ -51,7 +57,8 @@ function App() {
           <Routes>
             <Route path="/" element={<JobListPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />
-            <Route path="/new" element={<NewJobForm />} />
+            <Route path="/jobs/:id/edit" element={<EditJobForm />} />
+            <Route path="/new" element={<NewJobForm token={user.token} />} />
           </Routes>
           <Footer />
         </JobProvider>
