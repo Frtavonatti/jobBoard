@@ -57,7 +57,7 @@ function App() {
           <Routes>
             <Route path="/" element={<JobListPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />
-            <Route path="/jobs/:id/edit" element={<EditJobForm />} />
+            <Route path="/jobs/:id/edit" element={<EditJobForm token={user.token} />} />
             <Route path="/new" element={<NewJobForm token={user.token} />} />
           </Routes>
           <Footer />

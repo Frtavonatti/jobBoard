@@ -10,7 +10,6 @@ const NewJobForm = ({ token }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
-    company: "",
     location: "",
     applicationUrl: "",
     employmentType: "Full-time",

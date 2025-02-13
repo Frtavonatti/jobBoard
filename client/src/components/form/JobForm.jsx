@@ -19,12 +19,12 @@ const JobForm = ({ formData, handleSubmit, handleChange }) => {
         onChange={handleChange}
       />
 
-      <FormInput
+      {/* <FormInput
         label="Company Name"
         name="company"
         value={formData.company}
         onChange={handleChange}
-      />
+      /> */}
 
       <FormInput
         label="Location"

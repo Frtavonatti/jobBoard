@@ -32,9 +32,12 @@ const createJob = async (newJob, token) => {
   }
 };
 
-const updateJob = async (id, updatedJob) => {
+const updateJob = async (id, updatedJob, token) => {
   try {
-    const response = axios.put(`${baseUrl}/${id}`, updatedJob);
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    const response = axios.put(`${baseUrl}/${id}`, updatedJob, config);
     return response.data;
   } catch (error) {
     console.log("Error updating data:", error);

@@ -5,7 +5,7 @@ import jobService from "../services/jobs";
 import JobForm from "../components/form/JobForm";
 import FormActions from "../components/form/FormActions";
 
-const EditJobForm = () => {
+const EditJobForm = ({ token }) => {
   const { id } = useParams();
   const [, dispatchNotification] = useNotificationContext();
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const EditJobForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await jobService.updateJob(id, formData);
+      await jobService.updateJob(id, formData, token);
       dispatchNotification({
         type: "SHOW_NOTIFICATION",
         payload: `Job "${formData.title}" updated successfully`,
@@ -57,7 +57,7 @@ const EditJobForm = () => {
         onSubmit={handleSubmit}
         formData={formData}
         submitText="Update Job"
-        onCancel={() => navigate(`/jobs/${id}`)}
+        onCancel={() => navigate('/')}
       />
     </div>
   );

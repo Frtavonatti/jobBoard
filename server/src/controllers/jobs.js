@@ -44,10 +44,11 @@ jobsRouter.post('/', async (req, res) => {
   }
 
   const newJob = new Job({
-    // company_id: company.id, // this field populates the company_id field in the job schema
+    company_id: company._id, 
+    company: company.name,
+
     id: body.id,
     title: body.title,
-    company: body.company,
     location: body.location,
     employmentType: body.employmentType,
     seniority: body.seniority,
