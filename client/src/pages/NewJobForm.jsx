@@ -16,10 +16,9 @@ const NewJobForm = ({ token }) => {
     seniority: "Entry Level",
     salary: "",
     description: "",
-    summary: "",
     requirements: "",
     tasks: "",
-    datePosted: new Date().toISOString().split("T")[0],
+    datePosted: new Date().toISOString(),
   });
 
   const handleChange = (e) => {

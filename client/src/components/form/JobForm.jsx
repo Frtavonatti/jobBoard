@@ -19,13 +19,6 @@ const JobForm = ({ formData, handleSubmit, handleChange }) => {
         onChange={handleChange}
       />
 
-      {/* <FormInput
-        label="Company Name"
-        name="company"
-        value={formData.company}
-        onChange={handleChange}
-      /> */}
-
       <FormInput
         label="Location"
         name="location"
@@ -64,16 +57,23 @@ const JobForm = ({ formData, handleSubmit, handleChange }) => {
       />
 
       <FormTextArea
-        label="Summary"
-        name="summary"
-        value={formData.summary}
+        label="Description"
+        name="description"
+        value={formData.description}
         onChange={handleChange}
       />
 
       <FormTextArea
-        label="Full Description"
-        name="description"
-        value={formData.description}
+        label="Job Functions"
+        name="tasks"
+        value={formData.tasks}
+        onChange={handleChange}
+      />
+
+      <FormTextArea
+        label="Requirements"
+        name="requirements"
+        value={formData.requirements}
         onChange={handleChange}
       />
     </form>

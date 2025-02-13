@@ -37,7 +37,7 @@ const JobDetailsPage = () => {
                 Follow
               </a>
             </div>
-            <p className="text-sm text-gray-500">{job.datePosted}</p>
+            <p className="text-sm text-gray-500">{job.datePosted.split("T")[0]}</p>
           </div>
 
           <button onClick={() => navigate(`/jobs/${id}/edit`)} className="btn">Edit</button>
