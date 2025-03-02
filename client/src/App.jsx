@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import JobListPage from "./pages/JobListPage";
+import MyJobsList from "./pages/MyJobsList";
 import JobDetailsPage from "./pages/JobDetailsPage";
 import NewJobForm from "./pages/NewJobForm";
 import EditJobForm from "./pages/EditJobForm";
@@ -37,32 +38,33 @@ function App() {
     }
   }, []);
 
-  // Fix this function to handle user authentication
-  if (!user) {
-    return (<LoginPage />);
-  }
-
   return (
     <NotificationProvider>
-      <Notification />
-      {!user ? (
+      <JobProvider>
+        <Notification />
+        {user && <Header handleTheme={handleTheme} user={user} />}
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="*" element={<LoginPage />} />
+          {!user ? (
+            <>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<JobListPage />} />
+              <Route path="/jobs/:id" element={<JobDetailsPage />} />
+              {user.role === "company" && (
+                <>
+                  <Route path="/myjobs" element={<MyJobsList />} />
+                  <Route path="/jobs/:id/edit" element={<EditJobForm token={user.token} />} />
+                  <Route path="/new" element={<NewJobForm token={user.token} />} />
+                </>
+              )}
+            </>
+          )}
         </Routes>
-      ) : (
-        <JobProvider>
-          <Header handleTheme={handleTheme} user={user} />
-          <Routes>
-            <Route path="/" element={<JobListPage />} />
-            <Route path="/jobs/:id" element={<JobDetailsPage />} />
-            <Route path="/jobs/:id/edit" element={<EditJobForm token={user.token} />} />
-            <Route path="/new" element={<NewJobForm token={user.token} />} />
-          </Routes>
-          <Footer />
-        </JobProvider>
-      )}
+        {user && <Footer />}
+      </JobProvider>
     </NotificationProvider>
   );
 }
