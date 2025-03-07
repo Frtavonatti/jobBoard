@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { NotificationProvider } from "./context/NotificationContext";
 import { JobProvider } from "./context/JobContext";
 import { useState, useEffect } from "react";
@@ -46,11 +46,13 @@ function App() {
         <Routes>
           {!user ? (
             <>
+              <Route path="*" element={<Navigate to="/login" />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
             </>
           ) : (
             <>
+              <Route path="*" element={<Navigate to="/" />} />
               <Route path="/" element={<JobListPage />} />
               <Route path="/jobs/:id" element={<JobDetailsPage />} />
               {user.role === "company" && (
