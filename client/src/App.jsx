@@ -57,6 +57,7 @@ function App() {
               <Route path="/jobs/:id" element={<JobDetailsPage />} />
               {user.role === "company" && (
                 <>
+                  <Route path="*" element={<Navigate to="/myjobs" />} />
                   <Route path="/myjobs" element={<MyJobsList />} />
                   <Route path="/jobs/:id/edit" element={<EditJobForm token={user.token} />} />
                   <Route path="/new" element={<NewJobForm token={user.token} />} />

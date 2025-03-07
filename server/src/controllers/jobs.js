@@ -128,4 +128,29 @@ jobsRouter.put('/:id', async (req, res) => {
   }
 })
 
+jobsRouter.get('/company/myjobs', async (req, res) => {
+  const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token missing or invalid' })
+  }
+
+  const user = await User.findById(decodedToken.id)
+  if (user.role !== 'company') {
+    return res.status(403).json({ error: 'only companies can view their jobs' })
+  }
+
+  const company = await Company.findOne({ user_id: user.id })
+  if (!company) {
+    return res.status(404).json({ error: 'company not found' })
+  }
+
+  try {
+    const jobs = await Job.find({ company_id: company._id })
+    res.json(jobs)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'internal server error' })
+  }
+})
+
 module.exports = jobsRouter

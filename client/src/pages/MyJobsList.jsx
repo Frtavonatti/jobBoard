@@ -8,10 +8,13 @@ const MyJobsList = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    jobService
-      .getJobs()
-      .then((data) => dispatch({ type: "SET_JOBS", payload: data }))
-      .catch((error) => console.error("Error fetching jobs:", error));
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && user.token) {
+      jobService
+        .getMyJobs(user.token)
+        .then((data) => dispatch({ type: "SET_JOBS", payload: data }))
+        .catch((error) => console.error("Error fetching jobs:", error));
+    }
   }, [dispatch]);
 
   const handleSearch = (event) => {

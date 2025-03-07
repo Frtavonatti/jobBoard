@@ -20,6 +20,14 @@ const getOneJob = async (id) => {
   }
 };
 
+const getMyJobs = async (token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  }
+  const response = await axios.get(`${baseUrl}/company/myjobs`, config)
+  return response.data
+}
+
 const createJob = async (newJob, token) => {
   try {
     const config = {
@@ -53,4 +61,4 @@ const deleteJob = async (id) => {
   }
 };
 
-export default { getJobs, getOneJob, createJob, updateJob, deleteJob };
+export default { getJobs, getOneJob, createJob, updateJob, deleteJob, getMyJobs };
