@@ -30,6 +30,10 @@ function App() {
   // Authentication
   const [user, setUser] = useState(null);
 
+  if (user) {
+    console.log('User:', user);
+  }
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
