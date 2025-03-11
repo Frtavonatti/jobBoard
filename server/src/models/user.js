@@ -1,34 +1,57 @@
 const mongoose = require('mongoose')
-const job = require('./job')
+
+const companySchema = new mongoose.Schema({
+  name: { type: String, required: true, unique: true },
+  industry: { type: String, required: true },
+  job_posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
+  users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+})
+
+const candidateSchema = new mongoose.Schema({
+  first_name: { type: String, required: true },
+  last_name: { type: String, required: true },
+  applications: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }]
+})
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['candidate', 'company'], required: true }
+  role: { type: String, enum: ['candidate', 'company'], required: true },
+  company_id: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Company',
+    required: function() { return this.role === 'company'; }
+  },
+  candidate_id: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Candidate',
+    required: function() { return this.role === 'candidate'; }
+  }
 })
 
-const companySchema = new mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
-  name: { type: String, required: true },
-  industry: { type: String, required: true },
-  job_posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }]
-  // location: { type: String, required: true },
-})
-
-const candidateSchema = new mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
-  applications : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
-  first_name: { type: String, required: true },
-  last_name: { type: String, required: true }
-  // resume: { type: String, required: true }
-})
-
+// Transform functions
 userSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
     delete returnedObject.password
+  }
+})
+
+companySchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
+candidateSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
   }
 })
 
