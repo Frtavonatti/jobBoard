@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const companySchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   industry: { type: String, required: true },
   job_posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
   users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]

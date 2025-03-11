@@ -139,7 +139,7 @@ jobsRouter.get('/company/myjobs', async (req, res) => {
     return res.status(403).json({ error: 'only companies can view their jobs' })
   }
 
-  const company = await Company.findOne({ user_id: user.id })
+  const company = await Company.findById(user.company_id)
   if (!company) {
     return res.status(404).json({ error: 'company not found' })
   }

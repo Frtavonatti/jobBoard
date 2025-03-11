@@ -72,24 +72,22 @@ userRouter.post('/signup', async (req, res) => {
     let companyId, candidateId
 
     if (role === 'company') {
-      let company
-      if (profileData.companyId) {
-        company = await Company.findById(profileData.companyId)
-        if (!company) {
-          return res.status(404).json({ error: 'Company not found' })
-        }
-      } else {
+      let company = await Company.findOne({ name: profileData.name })
+
+      if (!company) {
         company = await Company.create({
           name: profileData.name,
           industry: profileData.industry,
-          users: [] // Inicialmente sin usuarios
+          job_posts: [],
+          users: []
         })
       }
       companyId = company._id
+
     } else {
       const candidate = await Candidate.create({
-        first_name: profileData.first_name,
-        last_name: profileData.last_name
+      first_name: profileData.first_name,
+      last_name: profileData.last_name
       })
       candidateId = candidate._id
     }
