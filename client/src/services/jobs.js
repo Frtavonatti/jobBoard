@@ -56,9 +56,13 @@ const updateJob = async (id, updatedJob, token) => {
   }
 };
 
-const deleteJob = async (id) => {
+// Pass in token to delete job
+const deleteJob = async (id, token) => {
   try {
-    const response = axios.delete(`${baseUrl}/${id}`);
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    const response = axios.delete(`${baseUrl}/${id}`, config);
     return response.data;
   } catch (error) {
     console.log("Error deleting data:", error);

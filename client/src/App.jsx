@@ -30,10 +30,6 @@ function App() {
   // Authentication
   const [user, setUser] = useState(null);
 
-  if (user) {
-    console.log('User:', user);
-  }
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -57,12 +53,12 @@ function App() {
           ) : (
             <>
               <Route path="*" element={<Navigate to="/" />} />
-              <Route path="/" element={<JobListPage />} />
+              <Route path="/" element={<JobListPage token={user.token}/>} />
               <Route path="/jobs/:id" element={<JobDetailsPage />} />
               {user.role === "company" && (
                 <>
                   <Route path="*" element={<Navigate to="/myjobs" />} />
-                  <Route path="/myjobs" element={<MyJobsList />} />
+                  <Route path="/myjobs" element={<MyJobsList token={user.token} />} />
                   <Route path="/jobs/:id/edit" element={<EditJobForm token={user.token} />} />
                   <Route path="/new" element={<NewJobForm token={user.token} />} />
                 </>

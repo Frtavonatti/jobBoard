@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import jobService from "../services/jobs";
 import JobList from "../components/job/JobList";
 
-const MyJobsList = () => {
+const MyJobsList = ({ token }) => {
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -26,6 +26,7 @@ const MyJobsList = () => {
     <>
       <JobList
         jobs={jobs}
+        token={token}
         pageTitle="My Jobs"
         searchTerm={searchTerm}
         handleSearch={handleSearch}

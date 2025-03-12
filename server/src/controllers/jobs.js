@@ -38,7 +38,7 @@ jobsRouter.post('/', async (req, res) => {
     return res.status(401).json({ error: 'only companies can post jobs' })
   }
 
-  const company = await Company.findOne({ user_id: user.id })
+  const company = await Company.findById({ _id: user.company_id })
   if (!company) {
     return res.status(401).json({ error: 'company not found' })
   }
@@ -47,7 +47,6 @@ jobsRouter.post('/', async (req, res) => {
     company_id: company._id, 
     company: company.name,
 
-    id: body.id,
     title: body.title,
     location: body.location,
     employmentType: body.employmentType,
@@ -61,6 +60,8 @@ jobsRouter.post('/', async (req, res) => {
 
   try {
     const savedJob = await newJob.save()
+    company.job_posts = company.job_posts.concat(savedJob._id)
+    await company.save()
     res.json(savedJob)
   } catch (error) {
     console.log(error);
@@ -71,8 +72,29 @@ jobsRouter.post('/', async (req, res) => {
 jobsRouter.delete('/:id', async (req, res) => {
   const id = req.params.id
 
+  const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token missing or invalid' })
+  }
+
+  const user = await User.findById(decodedToken.id)
+  if (user.role !== 'company') {
+    return res.status(403).json({ error: 'only companies can delete job posts' })
+  }
+
+  const company = await Company.findById({ _id: user.company_id })
+  if (!company) {
+    return res.status(404).json({ error: 'company not found' })
+  }
+
+  if (!company.job_posts.includes(id)) {
+    return res.status(403).json({ error: 'you do not have permission to delete this job post' })
+  }
+
   try {
     await Job.findByIdAndDelete(id)
+    company.job_posts = company.job_posts.filter(jobId => jobId.toString() !== id)
+    await company.save()
     res.status(204).end()
   } catch (error) {
     console.log(error);
@@ -94,7 +116,7 @@ jobsRouter.put('/:id', async (req, res) => {
     return res.status(403).json({ error: 'only companies can edit job posts' })
   }
 
-  const company = await Company.findOne({ user_id: user.id })
+  const company = await Company.findById({ _id: user.company_id })
   if (!company) {
     return res.status(404).json({ error: 'company not found' })
   }
@@ -109,18 +131,22 @@ jobsRouter.put('/:id', async (req, res) => {
   }
 
   const updatedJob = {
-    title: body.title,
-    location: body.location,
-    employmentType: body.employmentType,
-    seniority: body.seniority,
-    description: body.description,
-    salary: body.salary,
-    requirements: body.requirements,
-    tasks: body.tasks
-  }
+      title: body.title,
+      location: body.location,
+      employmentType: body.employmentType,
+      seniority: body.seniority,
+      description: body.description,
+      salary: body.salary,
+      requirements: body.requirements,
+      tasks: body.tasks
+    }
 
   try {
-    const savedJob = await Job.findByIdAndUpdate(jobId, updatedJob, { new: true })
+  const savedJob = await Job.findByIdAndUpdate(
+    jobId, 
+    { $set: updatedJob}, 
+    { new: true }
+  )
     res.json(savedJob)
   } catch (error) {
     console.log(error)

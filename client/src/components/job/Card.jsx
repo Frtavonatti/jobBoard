@@ -6,10 +6,12 @@ import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
 import IconSection from "./IconSection";
 
-const Card = ({ job }) => {
+const Card = ({ job, token }) => {
   const [{ jobs }, dispatch] = useJobContext();
   const [, dispatchNotification] = useNotificationContext();
   const navigate = useNavigate();
+
+  console.log('token', token);
 
   const removeJob = async (id, title) => {
     if (
@@ -18,7 +20,7 @@ const Card = ({ job }) => {
       )
     ) {
       try {
-        await jobService.deleteJob(id);
+        await jobService.deleteJob(id, token);
         const updatedJobList = jobs.filter((job) => job.id !== id);
         dispatch({ type: "SET_JOBS", payload: updatedJobList });
         dispatchNotification({
