@@ -14,6 +14,31 @@ jobsRouter.get('/', async (_req, res) => {
   }
 })
 
+jobsRouter.get('/myjobs', async (req, res) => {
+  const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token missing or invalid' })
+  }
+
+  const user = await User.findById(decodedToken.id)
+  if (user.role !== 'company') {
+    return res.status(403).json({ error: 'only companies can view their jobs' })
+  }
+
+  const company = await Company.findById(user.company_id)
+  if (!company) {
+    return res.status(404).json({ error: 'company not found' })
+  }
+
+  try {
+    const jobs = await Job.find({ company_id: company._id })
+    res.json(jobs)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'internal server error' })
+  }
+})
+
 jobsRouter.get('/:id', async (req, res) => {
   try {
     const id = req.params.id
@@ -148,31 +173,6 @@ jobsRouter.put('/:id', async (req, res) => {
     { new: true }
   )
     res.json(savedJob)
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: 'internal server error' })
-  }
-})
-
-jobsRouter.get('/company/myjobs', async (req, res) => {
-  const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
-  if (!decodedToken.id) {
-    return res.status(401).json({ error: 'token missing or invalid' })
-  }
-
-  const user = await User.findById(decodedToken.id)
-  if (user.role !== 'company') {
-    return res.status(403).json({ error: 'only companies can view their jobs' })
-  }
-
-  const company = await Company.findById(user.company_id)
-  if (!company) {
-    return res.status(404).json({ error: 'company not found' })
-  }
-
-  try {
-    const jobs = await Job.find({ company_id: company._id })
-    res.json(jobs)
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'internal server error' })

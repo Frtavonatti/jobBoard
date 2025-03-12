@@ -1,17 +1,15 @@
 import { Link } from "react-router-dom";
-import { Trash2, Pen } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { useJobContext } from "../../context/JobContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
 import IconSection from "./IconSection";
+import CardActions from "./CardActions";
 
 const Card = ({ job, token }) => {
   const [{ jobs }, dispatch] = useJobContext();
   const [, dispatchNotification] = useNotificationContext();
-  const navigate = useNavigate();
 
-  console.log('token', token);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const removeJob = async (id, title) => {
     if (
@@ -49,21 +47,9 @@ const Card = ({ job, token }) => {
             </p>
           </div>
 
-          <div className="flex gap-2">
-            <button
-              className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300 dark:bg-slate-600"
-              onClick={() => navigate(`/jobs/${job.id}/edit`)}
-            >
-              <Pen size={20} className="dark:text-slate-100" />
-            </button>
-
-            <button
-              className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300 dark:bg-slate-600"
-              onClick={() => removeJob(job.id, job.title)}
-              >
-              <Trash2 size={20} className="dark:text-slate-100" />
-            </button>
-          </div>
+          {(user.profile.id === job.company_id) && (
+            <CardActions job={job} removeJob={removeJob} />
+          )}
         </div>
       </div>
 

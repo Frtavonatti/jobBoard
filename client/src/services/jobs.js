@@ -25,7 +25,7 @@ const getMyJobs = async (token) => {
     headers: { Authorization: `Bearer ${token}` },
   }
   try {
-    const response = await axios.get(`${baseUrl}/company/myjobs`, config)
+    const response = await axios.get(`${baseUrl}/myjobs`, config)
     return response.data
   } catch (error) {
     console.error("Error fetching jobs", error)
