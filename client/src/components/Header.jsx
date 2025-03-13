@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { logout } from "../services/user";
+import { logout } from "../services/users";
 import ToggleThemeIcon from "./ui/ToggleThemeIcon";
 import reactLogo from "../assets/react.svg";
 

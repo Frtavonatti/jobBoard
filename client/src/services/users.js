@@ -14,12 +14,13 @@ export const login = async (email, password) => {
   }
 };
 
-export const signup = async (email, password, role) => {
+export const signup = async (email, password, role, profileData) => {
   try {
     const res = await axios.post(`${baseUrl}/signup`, {
       email,
       password,
       role,
+      profileData,
     });
     const user = res.data;
     localStorage.setItem("user", JSON.stringify(user));
