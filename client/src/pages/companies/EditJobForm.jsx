@@ -1,12 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useNotificationContext } from "../context/NotificationContext";
-import jobService from "../services/jobs";
-import JobForm from "../components/form/JobForm";
-import FormActions from "../components/form/FormActions";
+import { useAuth } from "../../context/AuthContext";
+import { useNotificationContext } from "../../context/NotificationContext";
+import jobService from "../../services/jobs";
+import JobForm from "../../components/form/JobForm";
+import FormActions from "../../components/form/FormActions";
 
-const EditJobForm = ({ token }) => {
+const EditJobForm = () => {
   const { id } = useParams();
+  const { user } = useAuth();
   const [, dispatchNotification] = useNotificationContext();
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
@@ -30,7 +32,7 @@ const EditJobForm = ({ token }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await jobService.updateJob(id, formData, token);
+      await jobService.updateJob(id, formData, user.token);
       dispatchNotification({
         type: "SHOW_NOTIFICATION",
         payload: `Job "${formData.title}" updated successfully`,

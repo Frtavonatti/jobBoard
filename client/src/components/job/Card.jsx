@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import { useJobContext } from "../../context/JobContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
 import IconSection from "./IconSection";
 import CardActions from "./CardActions";
 
-const Card = ({ job, token }) => {
+const Card = ({ job }) => {
+  const { user } = useAuth();
   const [{ jobs }, dispatch] = useJobContext();
   const [, dispatchNotification] = useNotificationContext();
-
-  const user = JSON.parse(localStorage.getItem("user"));
 
   const removeJob = async (id, title) => {
     if (
@@ -18,7 +18,7 @@ const Card = ({ job, token }) => {
       )
     ) {
       try {
-        await jobService.deleteJob(id, token);
+        await jobService.deleteJob(id, user.token);
         const updatedJobList = jobs.filter((job) => job.id !== id);
         dispatch({ type: "SET_JOBS", payload: updatedJobList });
         dispatchNotification({

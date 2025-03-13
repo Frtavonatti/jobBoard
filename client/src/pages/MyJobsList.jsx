@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import jobService from "../services/jobs";
 import JobList from "../components/job/JobList";
 
-const MyJobsList = ({ token }) => {
+const MyJobsList = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.token) {
       jobService
         .getMyJobs(user.token)
         .then((data) => setJobs(data))
         .catch((error) => console.error("Error fetching jobs:", error));
     }
-  }, []);
+  }, [user]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -24,13 +25,10 @@ const MyJobsList = ({ token }) => {
 
   if (!jobs) return <div>Loading...</div>;
 
-  console.log('jobs:', jobs);
-
   return (
     <>
       <JobList
         jobs={jobs}
-        token={token}
         pageTitle='My Jobs'
         searchTerm={searchTerm}
         handleSearch={handleSearch}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { login } from "../services/users";
-import FormInput from "../components/form/FormInput";
+import { login } from "../../services/users";
+import FormInput from "../../components/form/FormInput";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

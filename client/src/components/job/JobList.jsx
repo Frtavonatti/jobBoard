@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Card from "./Card";
 
-const JobList = ({ jobs, token, pageTitle, searchTerm, handleSearch }) => {
+const JobList = ({ jobs, pageTitle, searchTerm, handleSearch }) => {
   const filteredJobs = jobs.filter((job) =>
     job.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
@@ -27,7 +27,7 @@ const JobList = ({ jobs, token, pageTitle, searchTerm, handleSearch }) => {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filteredJobs.map((job) => (
-          <Card key={job.id} job={job} token={token}/>
+          <Card key={job.id} job={job}/>
         ))}
       </div>
     </div>

@@ -3,7 +3,7 @@ import { useJobContext } from "../context/JobContext";
 import jobService from "../services/jobs";
 import JobList from "../components/job/JobList";
 
-const JobListPage = ({ token }) => {
+const JobListPage = () => {
   const [{ jobs }, dispatch] = useJobContext();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -22,7 +22,6 @@ const JobListPage = ({ token }) => {
     <>
       <JobList
         jobs={jobs}
-        token={token}
         pageTitle="All Jobs"
         searchTerm={searchTerm}
         handleSearch={handleSearch}

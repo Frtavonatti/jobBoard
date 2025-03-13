@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { signup } from "../services/users";
-import FormInput from "../components/form/FormInput";
-import FormSelect from "../components/form/FormSelect";
+import { signup } from "../../services/users";
+import FormInput from "../../components/form/FormInput";
+import FormSelect from "../../components/form/FormSelect";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");

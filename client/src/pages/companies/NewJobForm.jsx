@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useNotificationContext } from "../context/NotificationContext";
-import jobService from "../services/jobs";
-import JobForm from "../components/form/JobForm";
-import FormActions from "../components/form/FormActions";
+import { useAuth } from "../../context/AuthContext";
+import { useNotificationContext } from "../../context/NotificationContext";
+import jobService from "../../services/jobs";
+import JobForm from "../../components/form/JobForm";
+import FormActions from "../../components/form/FormActions";
 
-const NewJobForm = ({ token }) => {
+const NewJobForm = () => {
+  const { user } = useAuth();
   const [, dispatchNotification] = useNotificationContext();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -32,7 +34,7 @@ const NewJobForm = ({ token }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!token) {
+    if (!user.token) {
       dispatchNotification({
         type: "SHOW_NOTIFICATION",
         payload: "You must be logged in to create a job post",
@@ -40,7 +42,7 @@ const NewJobForm = ({ token }) => {
     }
     
     try {
-      await jobService.createJob(formData, token);
+      await jobService.createJob(formData, user.token);
       dispatchNotification({
         type: "SHOW_NOTIFICATION",
         payload: `Post "${formData.title}" created successfully`,
