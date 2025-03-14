@@ -33,10 +33,10 @@ const Header = ({ handleTheme, user }) => {
           </summary>
           <ul className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
             <li>
-              <Link to="/myjobs">My Jobposts</Link>
+              <Link to="/myjobs">{user.role === 'company' ? 'Posted Jobs' : 'My Applications'}</Link>
             </li>
             <li>
-              <button onClick={logout}>Logout</button>
+              <button onClick={logout}>Sign Out</button>
             </li>
           </ul>
         </details>

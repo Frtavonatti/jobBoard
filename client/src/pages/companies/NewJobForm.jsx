@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
-import JobForm from "../../components/form/JobForm";
+import JobForm from "../../components/form/NewJobForm";
 import FormActions from "../../components/form/FormActions";
 
 const NewJobForm = () => {

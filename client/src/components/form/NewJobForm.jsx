@@ -2,7 +2,7 @@ import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
 import FormTextArea from "./FormTextArea";
 
-const JobForm = ({ formData, handleSubmit, handleChange }) => {
+const NewJobForm = ({ formData, handleSubmit, handleChange }) => {
   const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];
   const jobTypes = ["Full-time", "Part-time", "Internship"];
 
@@ -80,4 +80,4 @@ const JobForm = ({ formData, handleSubmit, handleChange }) => {
   );
 };
 
-export default JobForm;
+export default NewJobForm;

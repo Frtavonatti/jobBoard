@@ -1,9 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
 import jobService from "../services/jobs";
 
 const JobDetailsPage = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { id } = useParams();
   const [job, setJob] = useState(null);
 
@@ -39,8 +41,10 @@ const JobDetailsPage = () => {
             </div>
             <p className="text-sm text-gray-500">{job.datePosted.split("T")[0]}</p>
           </div>
-
-          <button onClick={() => navigate(`/jobs/${id}/edit`)} className="btn">Edit</button>
+          
+          { user && user.role === 'company' && (
+            <button onClick={() => navigate(`/jobs/${id}/edit`)} className="btn">Edit</button>
+          )}
         </div>
 
 
@@ -58,7 +62,15 @@ const JobDetailsPage = () => {
           <strong>Salary:</strong> {job.salary} USD/month
         </p>
 
-        <button className="btn">Apply</button>
+        {user && user.role === 'candidate' && (
+          <button  
+            onClick={() => navigate(`/jobs/${id}/apply`)}
+            className="btn"
+          >
+            Apply
+          </button>
+          )           
+        }
       </section>
 
       <section className="mb-6 px-8">
