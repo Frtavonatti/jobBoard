@@ -30,7 +30,7 @@ const getMyJobs = async (token) => {
   } catch (error) {
     console.error("Error fetching jobs", error)
   }
-}
+}    
 
 const createJob = async (newJob, token) => {
   try {
@@ -56,7 +56,6 @@ const updateJob = async (id, updatedJob, token) => {
   }
 };
 
-// Pass in token to delete job
 const deleteJob = async (id, token) => {
   try {
     const config = {
@@ -69,4 +68,11 @@ const deleteJob = async (id, token) => {
   }
 };
 
-export default { getJobs, getOneJob, createJob, updateJob, deleteJob, getMyJobs };
+export default { 
+  getJobs, 
+  getOneJob, 
+  getMyJobs, 
+  createJob, 
+  updateJob, 
+  deleteJob, 
+};

@@ -6,6 +6,7 @@ const app = express()
 
 const jobsRouter = require('./src/controllers/jobs')
 const userRouter = require('./src/controllers/users')
+const applicationsRouter = require('./src/controllers/applications')
 const { logger, errorHandler } = require('./src/lib/middleware')
 
 // Middleware
@@ -26,6 +27,7 @@ mongoose.connect(config.MONGO_URI)
 // Routes
 app.use('/api/jobs', jobsRouter)
 app.use('/api/users', userRouter)
+app.use('/api/applications', applicationsRouter)
 
 // Error handling middleware
 app.use(errorHandler)

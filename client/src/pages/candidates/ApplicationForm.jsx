@@ -1,20 +1,9 @@
 import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import jobService from "../../services/jobs"
 import { useAuth } from "../../context/AuthContext"
+import jobService from "../../services/jobs"
+import appService from "../../services/applications"
 import ApplyJobForm from "../../components/form/ApplyJobForm"
-
-// TODO: 
-// - [] Create backend functionality to apply to a job
-// - [] Change candidate schema
-// - [] Create a applyToJob method in the jobService
-// - [] Make all inputs required
-// - [] Disable input completion if user profile already has the data
-// - [] Create company questions for the application form
-// - [] Create a way to add questions to the application form
-// - [] Track application status (applied, reviewed, rejected, etc.)
-// - [] Allow candidates to view their submitted applications
-// - [] Add file upload for resume/CV (with size/type restrictions) (optional)
 
 const ApplicationForm = () => {
   const navigate = useNavigate()
@@ -53,13 +42,12 @@ const ApplicationForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    // try {
-    //   await jobService.applyToJob(id, formData, user.token)
-    //   navigate(`/jobs/${id}`)
-    // } catch (error) {
-    //   console.error("Error applying to job:", error)
-    // }
-    console.log('Form data:', formData)
+    try {
+      await appService.applyToJob(id, formData, user.token)
+      navigate(`/jobs/${id}`)
+    } catch (error) {
+      console.error("Error applying to job:", error)
+    }
   }
 
   return (

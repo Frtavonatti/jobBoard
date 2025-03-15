@@ -32,12 +32,12 @@
 - [x] Build the **Job Details** page:
   - [x] Fetch job details from `/jobs/:id`.
   - [x] Display job description, requirements, and company details.
-  - [ ] Add buttons for liking and applying to jobs.
+  - [/] Add buttons for liking and applying to jobs.
 
 ## **Company Dashboard**
 
 - [x] Create the **My Job Posts** page:
-  - [ ] Fetch jobs posted by the company from `/my-jobs`.
+  - [x] Fetch jobs posted by the company from `/my-jobs`.
   - [x] Display job cards with options to edit or delete.
 - [x] Build the **Create/Edit Job Post** page:
   - [x] Form to add or edit job details (title, description, location, salary, experience level, type).
@@ -46,8 +46,8 @@
 ## **Navigation and Layout**
 
 - [x] Create a **Navbar**:
-  - [/] Links to home, login/register, dashboard, and logout.
-  - [ ] Update dynamically based on authentication state.
+  - [x] Links to home, login/register, dashboard, and logout.
+  - [x] Update dynamically based on authentication state.
 - [x] Create a **Footer** with basic links and branding.
 
 ## **Styling and Responsiveness**
