@@ -1,5 +1,16 @@
 const mongoose = require('mongoose')
 
+const questionSchema = new mongoose.Schema({
+  text: { type: String, required: true },
+  type: { 
+    type: String, 
+    enum: ['text', 'multipleChoice', 'boolean'], 
+    default: 'text' 
+  },
+  required: { type: Boolean, default: false },
+  options: [String],
+})
+
 const jobSchema = new mongoose.Schema({
   company_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
   title: { type: String, required: true },
@@ -12,6 +23,7 @@ const jobSchema = new mongoose.Schema({
   datePosted: { type: Date },
   requirements: { type: [String] },
   tasks: { type: [String] },
+  questions: [questionSchema],
 })
 
 jobSchema.set('toJSON', {

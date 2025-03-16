@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const Application = require('../models/application');
 const Job = require('../models/job');
 const { User } = require('../models/user');
-const { getTokenFrom } = require('../lib/utils');
+const { getTokenFrom } = require('../utils/utils');
 
 applicationsRouter.get('/', async (_req, res) => {
   try {

@@ -1,4 +1,4 @@
-const config = require('./src/lib/config')
+const config = require('./src/utils/config')
 const express = require('express');
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -7,7 +7,7 @@ const app = express()
 const jobsRouter = require('./src/controllers/jobs')
 const userRouter = require('./src/controllers/users')
 const applicationsRouter = require('./src/controllers/applications')
-const { logger, errorHandler } = require('./src/lib/middleware')
+const { logger, errorHandler } = require('./src/utils/middleware')
 
 // Middleware
 app.use(cors())

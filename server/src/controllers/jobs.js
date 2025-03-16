@@ -2,7 +2,7 @@ const jobsRouter = require('express').Router()
 const jwt = require('jsonwebtoken')
 const Job = require('../models/job')
 const { User, Company } = require('../models/user')
-const { getTokenFrom } = require('../lib/utils')
+const { getTokenFrom } = require('../utils/utils')
 
 jobsRouter.get('/', async (_req, res) => {
   try {
