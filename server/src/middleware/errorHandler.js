@@ -1,11 +1,3 @@
-const logger = (req, _res, next) => {
-  console.log('PATH: ', req.path);
-  console.log('METHOD: ', req.method);
-  console.log('BODY: ', req.body);
-  console.log('---');
-  next();
-}
-
 const errorHandler = (error, _req, res, next) => {
   if (error.name === 'CastError') {
     return res.status(400).send({ error: 'malformatted id' });
@@ -17,4 +9,4 @@ const errorHandler = (error, _req, res, next) => {
   next(error);
 }
 
-module.exports = { logger, errorHandler };
+module.exports = errorHandler

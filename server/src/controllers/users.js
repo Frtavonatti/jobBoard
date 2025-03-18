@@ -3,12 +3,18 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { User, Company, Candidate } = require('../models/user')
 
+// Get all users
+userRouter.get('/', async (req, res) => {
+  const users = await User.find({})
+  res.json(users)
+})
+
+
 // Login
 userRouter.post('/login', async (req, res) => {
   const { email, password } = req.body
 
   let user = await User.findOne({ email })
-  
   if (!user) {
     return res.status(401).json({ error: 'invalid email or password' })
   }
@@ -124,12 +130,6 @@ userRouter.post('/signup', async (req, res) => {
     console.log(error)
     res.status(500).json({ error: error.message })
   }
-})
-
-// Get all users
-userRouter.get('/', async (req, res) => {
-  const users = await User.find({ })
-  res.json(users)
 })
 
 module.exports = userRouter

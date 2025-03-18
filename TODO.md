@@ -7,8 +7,9 @@
 - [x] Create application schema in the backend
 - [x] Create backend functionality to apply to a job
 - [x] Create answer and question schemas
+- [x] Create auth validation Middleware
+- [ ] Extend errorHandler Middleware
 - [ ] Integrate answer and question to application and job controllers
-- [ ] Add errorHandler Middleware
 
 ### Client
 **Logic**

@@ -1,0 +1,62 @@
+Table user {
+  id integer [primary key]
+  email varchar [unique]
+  password varchar
+  created_at timestamp
+}
+
+Table companie {
+  id integer [primary key]
+  user_id integer [not null]
+  name varchar
+  location varchar
+  industry varchar
+}
+
+Table candidate {
+  id integer [primary key]
+  user_id integer [not null]
+  first_name varchar
+  last_name varchar
+}
+
+Table job_posts {
+  id integer [primary key]
+  company_id integer [not null]
+  title varchar
+  description text
+  location varchar
+  salary integer
+  experience_level varchar
+  type varchar [note: 'e.g., full-time, part-time']
+}
+
+Table applications {
+  id integer [primary key]
+  candidate_id integer [not null]
+  job_post_id integer [not null]
+}
+
+Table question {
+  id integer [primary key]
+  job_post_id integer [not null]  
+  text varchar [not null]          
+  type varchar [not null]         
+  required boolean [default: false]
+}
+
+Table answer {
+  id integer [primary key]
+  application_id integer [not null] 
+  question_id integer [not null]    
+  answer_text text                   
+}
+
+Ref: user.id - companie.user_id
+Ref: user.id < candidate.user_id
+Ref: companie.id < job_posts.company_id
+Ref candidate_applications: candidate.id < applications.candidate_id
+Ref job_applications: job_posts.id < applications.job_post_id
+Ref: job_posts.id < question.job_post_id
+Ref: applications.id < answer.application_id
+Ref: question.id < answer.question_id
