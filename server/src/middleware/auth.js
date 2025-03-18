@@ -2,85 +2,70 @@ const jwt = require('jsonwebtoken');
 const { User, Company } = require('../models/user');
 const Job = require('../models/job');
 const { getTokenFrom } = require('../utils/authUtils')
+const asyncHandler = require('./asyncHandler')
+const { 
+  NotFoundError, 
+  ForbiddenError,
+  UnauthorizedError 
+} = require('../utils/errors')
 
-const verifyToken = async (req, res, next) => {
-  try {
-    const token = getTokenFrom(req)
-    if (!token) {
-      return res.status(401).json({ error: 'token missing' })
-    }
-    
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-    if (!decodedToken.id) {
-      return res.status(401).json({ error: 'invalid token' })
-    }
+const verifyToken = asyncHandler(async (req, _res, next) => {
+  const token = getTokenFrom(req)
+  if (!token) {
+    throw new UnauthorizedError('token missing')
+  }
   
-    req.userId = decodedToken.id
-    next()
-  } catch (error) {
-    console.log(error);
-    return res.status().json({ error: 'internal server error' })
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if (!decodedToken.id) {
+    throw new UnauthorizedError('invalid token')
   }
-}
 
-const verifyCompanyRole = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.userId)
-    if (!user) {
-      return res.status(404).json({ error: 'user not found' })
-    }
+  req.userId = decodedToken.id
+  next()
+})
 
-    if (user.role !== 'company') {
-      return res.status(403).json({ error: 'only companies can view their jobs' })
-    }
-
-    req.user = user
-    next()
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: 'internal server error' })
+const verifyCompanyRole = asyncHandler(async (req, _res, next) => {
+  const user = await User.findById(req.userId)
+  if (!user) {
+    throw new NotFoundError('user not found')
   }
-}
 
-const findCompany = async (req, res, next) => {
-  try {
-    const company = await Company.findById({ _id: req.user.company_id })
-
-    if (!company) {
-      return res.status(404).json({ error: 'company not found' })
-    }
-
-    req.company = company
-    next()
-  } catch (error) {
-    console.log(error);
-    return res.status().json({ error: 'internal server error' })
+  if (user.role !== 'company') {
+    throw new ForbiddenError('only companies can view their jobs')
   }
-}
 
-const verifyJobOwnership = async (req, res, next) => {
-  try {
-    const jobId = req.params.id || req.params.jobId
-    if (!jobId) {
-      return res.status(400).json({ error: 'job id is required' })
-    }
+  req.user = user
+  next()
+})
 
-    const job = await Job.findById(jobId)
-    if (!job) {
-      return res.status(404).json({ error: 'job post not found' })
-    }
-  
-    if (job.company_id.toString() !== req.company._id.toString()) {
-      return res.status(403).json({ error: 'you do not have permission to edit this job post' })
-    }
-
-    req.job = job
-    next()
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: 'internal server error' })
+const findCompany = asyncHandler(async (req, _res, next) => {
+  const company = await Company.findById({ _id: req.user.company_id })
+  if (!company) {
+    throw new NotFoundError('company not found')
   }
-}
+
+  req.company = company
+  next()
+})
+
+const verifyJobOwnership = asyncHandler(async (req, _res, next) => {
+  const jobId = req.params.id || req.params.jobId
+  if (!jobId) {
+    throw new Error('job id is required')
+  }
+
+  const job = await Job.findById(jobId)
+  if (!job) {
+    throw new NotFoundError('job post not found')
+  }
+
+  if (job.company_id.toString() !== req.company._id.toString()) {
+    throw new ForbiddenError('you do not have permission to edit this job post')
+  }
+
+  req.job = job
+  next()
+})
 
 module.exports = { 
   verifyToken, 
