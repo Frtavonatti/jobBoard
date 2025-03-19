@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import jobService from "../services/jobs";
-import JobList from "../components/job/JobList";
+import { useAuth } from "../../context/AuthContext";
+import jobService from "../../services/jobs";
+import JobList from "../../components/job/JobList";
 
 const MyJobsList = () => {
   const navigate = useNavigate();

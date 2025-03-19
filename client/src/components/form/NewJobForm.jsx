@@ -1,6 +1,6 @@
-import FormInput from "./FormInput";
-import FormSelect from "./FormSelect";
-import FormTextArea from "./FormTextArea";
+import FormInput from "./inputs/FormInput";
+import FormSelect from "./inputs/FormSelect";
+import FormTextArea from "./inputs/FormTextArea";
 
 const NewJobForm = ({ formData, handleSubmit, handleChange }) => {
   const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];

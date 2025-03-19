@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
 import JobForm from "../../components/form/NewJobForm";
-import FormActions from "../../components/form/FormActions";
+import FormActions from "../../components/form/inputs/FormActions";
 
 const NewJobForm = () => {
   const { user } = useAuth();

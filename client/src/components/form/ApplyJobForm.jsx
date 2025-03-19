@@ -1,5 +1,5 @@
-import FormInput from "./FormInput"
-import QuestionRenderer from "../questions/QuestionRenderer"
+import FormInput from "./inputs/FormInput"
+import QuestionRenderer from "./questions/QuestionRenderer"
 
 const ApplyJobForm = ({ 
   formData, 

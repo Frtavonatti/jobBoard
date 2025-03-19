@@ -4,13 +4,13 @@ import useTheme from "./hooks/useTheme";
 import LoginPage from "./pages/auth/LoginPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import JobListPage from "./pages/JobListPage";
-import MyJobsList from "./pages/MyJobsList";
 import JobDetailsPage from "./pages/JobDetailsPage";
 import ApplicationForm from "./pages/candidates/ApplicationForm";
+import MyJobsList from "./pages/companies/MyJobsList";
 import NewJobForm from "./pages/companies/NewJobForm";
 import EditJobForm from "./pages/companies/EditJobForm";
 import NotFound from "./pages/NotFound";
-import Layout from "./components/Layout";
+import Layout from "./components/layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Notification from "./components/Notification";
 

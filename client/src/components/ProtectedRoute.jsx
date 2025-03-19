@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "./ui/LoadingSpinner";
 
 export const ProtectedRoute = ({ allowedRoles = [], redirectPath = "/login" }) => {
   const { user, isLoading } = useAuth();
