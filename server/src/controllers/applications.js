@@ -25,6 +25,14 @@ applicationsRouter.post('/:jobId/apply', verifyToken, asyncHandler(async (req, r
 
   const [user, job] = await validateApplication(userId, jobId);
 
+  const answers = Object.entries(body.answers)
+  .map(([question_id, answer]) => {
+    return {
+      question_id,
+      answer,
+    };
+  });
+
   const application = new Application({
     candidate_id: user.candidate_id,
     job_id: job._id,
@@ -36,7 +44,8 @@ applicationsRouter.post('/:jobId/apply', verifyToken, asyncHandler(async (req, r
       phone: body.phone || "",
       location: body.location || "",
       portfolio: body.portfolio || "",
-    }
+    },
+    answers,
   });
 
   const savedApplication = await application.save();

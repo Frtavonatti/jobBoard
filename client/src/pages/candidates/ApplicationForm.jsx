@@ -9,13 +9,16 @@ const ApplicationForm = () => {
   const navigate = useNavigate()
   const { user } = useAuth()
   const { id } = useParams()
-  const [ job, setJob ] = useState('')
-  const [ formData, setFormData ] = useState({})
+  const [job, setJob] = useState('')
+  const [formData, setFormData] = useState({})
+  const [questions, setQuestions] = useState([])
+  const [answers, setAnswers] = useState({})
 
   useEffect(() => {
     const fetchJob = async () => {
       const job = await jobService.getOneJob(id)
       setJob(job)
+      setQuestions(job.questions)
     }
     fetchJob()
   }
@@ -40,10 +43,25 @@ const ApplicationForm = () => {
     })
   }
 
+  const handleQuestionChange = (e) => {
+    const { name, value } = e.target;
+    setAnswers({
+      ...answers,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      await appService.applyToJob(id, formData, user.token)
+      const applicationData = {
+        ...formData,
+        answers,
+      }
+
+      console.log('applicationData:', applicationData) // Debugging
+      const savedApplication = await appService.applyToJob(id, applicationData, user.token)
+      console.log('savedApplication:', savedApplication) // Debugging
       navigate(`/jobs/${id}`)
     } catch (error) {
       console.error("Error applying to job:", error)
@@ -54,7 +72,13 @@ const ApplicationForm = () => {
     <div className="mb-6 px-8">
       <h3 className="m-8 text-2xl font-bold">Apply to {job.title} at {job.company}</h3>
       <form onSubmit={handleSubmit}>
-        <ApplyJobForm formData={formData} handleChange={handleChange} />
+        <ApplyJobForm 
+          formData={formData}
+          questions={questions} 
+          answers={answers}
+          handleChange={handleChange} 
+          handleQuestionChange={handleQuestionChange}
+        />
         
         <div className="mt-6 flex justify-end">
           <button 
@@ -64,10 +88,7 @@ const ApplicationForm = () => {
           >
             Cancel
           </button>
-          <button 
-            type="submit" 
-            className="btn btn-primary" 
-          >
+          <button type="submit" className="btn btn-primary">
             Apply
           </button>
         </div>

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const answerSchema = new mongoose.Schema({
   question_id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Question' },
-  questionText: { type: String, required: true }, // This should ref the text field of question Schema
+  // questionText: { type: String, required: true }, // This should ref the text field of question Schema
   answer: { type: mongoose.Schema.Types.Mixed, required: true } // que mierda es types mixed, deberia ser un string
 })
 

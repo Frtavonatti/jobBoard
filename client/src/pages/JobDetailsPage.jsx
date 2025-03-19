@@ -29,8 +29,9 @@ const JobDetailsPage = () => {
 
   return (
     <div className="text-start">
-      <section className="mb-6 p-8">
 
+      {/* JOB DETAILS SECTION */}
+      <section className="mb-6 p-8">
         <div className="flex justify-between items-center mb-4">
           <div className="mb-4 flex flex-col">
             <div className="flex items-center gap-2">
@@ -46,7 +47,6 @@ const JobDetailsPage = () => {
             <button onClick={() => navigate(`/jobs/${id}/edit`)} className="btn">Edit</button>
           )}
         </div>
-
 
         <h1 className="mb-2 text-4xl font-bold">{job.title}</h1>
 
@@ -73,6 +73,7 @@ const JobDetailsPage = () => {
         }
       </section>
 
+      {/* DESCRIPTION SECTION */}
       <section className="mb-6 px-8">
         {job.description && (
           <p className="mb-4 text-lg">
@@ -108,6 +109,22 @@ const JobDetailsPage = () => {
           </div>
         )}
       </section>
+
+      {/* QUESTION SECTION */}
+      {job.questions && (
+        <section className="mb-6 px-8">
+          <div>
+            <h2 className="mb-2 text-2xl font-semibold">Application Questions</h2>
+            <ul className="list-inside list-disc pl-5">
+              {job.questions.map((question, index) => (
+                <li key={index} className="mb-1 text-lg">
+                  {question.questionText}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

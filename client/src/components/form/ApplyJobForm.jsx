@@ -1,9 +1,15 @@
 import FormInput from "./FormInput"
+import QuestionRenderer from "../questions/QuestionRenderer"
 
-const ApplyJobForm = ({ formData, handleChange }) => {
+const ApplyJobForm = ({ 
+  formData, 
+  questions = [],
+  answers = {},
+  handleQuestionChange, 
+  handleChange }) => {
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-row gap-2">
+    <div className="flex flex-col gap-4 max-w-4xl mx-auto w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <FormInput
           value = {formData.firstName}
           name = "firstName"
@@ -22,10 +28,7 @@ const ApplyJobForm = ({ formData, handleChange }) => {
           onChange = {handleChange}
           disabled={formData.lastName !== undefined}
           required
-        />
-      </div>
-
-      <div className="flex flex-row gap-2">
+        />        
         <FormInput
           value = {formData.email}
           name = "email"
@@ -72,6 +75,18 @@ const ApplyJobForm = ({ formData, handleChange }) => {
         onChange = {handleChange}
         // required
       />
+
+      <section>
+        <h3 className="text-xl font-bold">Questions</h3>
+        {questions.map((question, index) => (
+          <QuestionRenderer
+            key={index}
+            question={question}
+            value={answers[question._id]}
+            onChange={handleQuestionChange}
+          />
+        ))}
+      </section>
     </div>
   )
 }
