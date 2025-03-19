@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const questionSchema = new mongoose.Schema({
-  text: { type: String, required: true },
-  type: { 
+  questionText: { type: String, required: true },
+  questionType: { 
     type: String, 
     enum: ['text', 'multipleChoice', 'boolean'], 
     default: 'text' 

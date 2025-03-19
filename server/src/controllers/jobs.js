@@ -53,7 +53,7 @@ jobsRouter.post('/',
       datePosted: body.datePosted || new Date(),
       requirements: body.requirements,
       tasks: body.tasks,
-      // questions: body.questions || [],
+      questions: body.questions || [],
     })
   
     const savedJob = await newJob.save()
@@ -92,7 +92,7 @@ jobsRouter.put('/:id',
       salary: body.salary,
       requirements: body.requirements,
       tasks: body.tasks,
-      // questions: body.questions
+      questions: body.questions
     }
   
     const savedJob = await Job.findByIdAndUpdate(
@@ -102,7 +102,7 @@ jobsRouter.put('/:id',
     )
 
     if (!savedJob) {
-      throw new NotFoundError('job post not found')
+      throw new NotFoundError('failed to create job post')
     } 
 
     res.json(savedJob)

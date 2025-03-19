@@ -1,4 +1,6 @@
 # General
+- [x] Implement protected routes in frontend
+- [ ] Check if its necessary to protect routes in backend
 - [ ] Implement notifications to allow user to visualize the state of the requests
 
 # Apply to jobs feature
@@ -10,6 +12,22 @@
 - [x] Create auth validation Middleware
 - [x] Extend errorHandler Middleware
 - [ ] Integrate answer and question to application and job controllers
+ - [x] Create POST application controller
+ - [ ] Create answer in application controller
+
+### Status Management
+- [ ] Create endpoint to update application status (applied → interview → accepted/rejected)
+
+### Security
+- [ ] Ensure only companies that own the job can view applications for that job
+
+### Notifications
+- [ ] Implement system to notify application status changes
+
+### User Interface
+- [ ] Design interface that allows:
+  - Companies: create questions and review answers
+  - Candidates: answer questions dynamically based on question type
 
 ### Client
 **Logic**

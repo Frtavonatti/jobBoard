@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import Card from "./Card";
 
 const JobList = ({ jobs, pageTitle, searchTerm, handleSearch }) => {
+  const { user } = useAuth();
+
   const filteredJobs = jobs.filter((job) =>
     job.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
@@ -10,9 +13,11 @@ const JobList = ({ jobs, pageTitle, searchTerm, handleSearch }) => {
     <div className="px-8">
       <div className="mt-8 flex items-center justify-between">
         <h2 className="text-4xl font-bold">{pageTitle}</h2>
-        <Link to="/new">
-          <button className="btn">Create a JobPost</button>
-        </Link>
+        { user && user.role === "company" &&
+          <Link to="/new">
+            <button className="btn">Create a JobPost</button>
+          </Link>
+        }
       </div>
 
       <form>

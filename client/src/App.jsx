@@ -9,7 +9,9 @@ import JobDetailsPage from "./pages/JobDetailsPage";
 import ApplicationForm from "./pages/candidates/ApplicationForm";
 import NewJobForm from "./pages/companies/NewJobForm";
 import EditJobForm from "./pages/companies/EditJobForm";
+import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Notification from "./components/Notification";
 
 function App() {
@@ -22,28 +24,31 @@ function App() {
       <Notification />
       <Layout user={user} handleTheme={toggleTheme}>
         <Routes>
-          {!user ? (
-            <>
-              <Route path="*" element={<Navigate to="/login" />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignUpPage />} />
-            </>
-          ) : (
-            <>
-              <Route path="*" element={<Navigate to="/" />} />
-              <Route path="/" element={<JobListPage />} />
-              <Route path="/jobs/:id" element={<JobDetailsPage />} />
-              <Route path="jobs/:id/apply" element={<ApplicationForm />} />
-              {user.role === "company" && (
-                <>
-                  <Route path="*" element={<Navigate to="/myjobs" />} />
-                  <Route path="/myjobs" element={<MyJobsList />} />
-                  <Route path="/jobs/:id/edit" element={<EditJobForm />} />
-                  <Route path="/new" element={<NewJobForm />} />
-                </>
-              )}
-            </>
-          )}
+          {/* Public routes */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          
+          {/* Protected routes for all authenticated users */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<JobListPage />} />
+            <Route path="/jobs/:id" element={<JobDetailsPage />} />
+            <Route path="/jobs/:id/apply" element={<ApplicationForm />} />
+          </Route>
+          
+          {/* Protected routes only for companies */}
+          <Route element={<ProtectedRoute allowedRoles={["company"]} />}>
+            <Route path="/myjobs" element={<MyJobsList />} />
+            <Route path="/jobs/:id/edit" element={<EditJobForm />} />
+            <Route path="/new" element={<NewJobForm />} />
+          </Route>
+          
+          {/* Fallback routes: */}
+          <Route path="/not-found" element={<NotFound />} />
+          
+          {/* Catch-all redirect: to NotFound if authenticated, to login if not */}
+          <Route path="*" element={
+            user ? <Navigate to="/not-found" replace /> : <Navigate to="/login" replace />
+          } />
         </Routes>
       </Layout>
     </>
