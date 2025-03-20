@@ -18,16 +18,17 @@
 
 ### Frontend
 #### Companies View
-- [ ] Allow companies to view applications for each job post
-- [ ] Design interface for creating questions and reviewing answers
-
+- [x] Design interface for creating questions
+- [ ] Improve interface for editing questions **next**
+- [ ] Allow companies to view applications for each job post (include drag and drop)
+- [ ] Design interface for reviewing answers 
 #### Candidates View
 - [ ] Create 'My Applications' page to view submitted applications
 - [ ] Design interface for answering questions dynamically
 - [ ] Track application status (applied, reviewed, rejected, etc.)
 
 #### UI Components
-- [ ] Make all inputs required
+- [ ] Make all inputs required (apply to job feature)
 - [ ] Add file upload for resume/CV (optional)
 
 ## Notifications System

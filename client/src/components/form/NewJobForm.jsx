@@ -2,7 +2,12 @@ import FormInput from "./inputs/FormInput";
 import FormSelect from "./inputs/FormSelect";
 import FormTextArea from "./inputs/FormTextArea";
 
-const NewJobForm = ({ formData, handleSubmit, handleChange }) => {
+const NewJobForm = ({ 
+  formData, 
+  handleSubmit, 
+  handleChange,
+  goToNextStep, 
+  onCancel}) => {
   const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];
   const jobTypes = ["Full-time", "Part-time", "Internship"];
 
@@ -26,12 +31,12 @@ const NewJobForm = ({ formData, handleSubmit, handleChange }) => {
         onChange={handleChange}
       />
 
-      <FormInput
+      {/* <FormInput
         label="Application URL"
         name="applicationUrl"
         value={formData.applicationUrl}
         onChange={handleChange}
-      />
+      /> */}
 
       <FormSelect
         label="Type"
@@ -76,6 +81,19 @@ const NewJobForm = ({ formData, handleSubmit, handleChange }) => {
         value={formData.requirements}
         onChange={handleChange}
       />
+
+      <div className="col-span-full flex justify-end gap-2">
+        <button
+          onClick={onCancel}
+          className="btn"
+        > Cancel
+        </button>
+        <button
+          onClick={() => goToNextStep()}
+          className="btn btn-primary"
+        > Next
+        </button>
+      </div>
     </form>
   );
 };

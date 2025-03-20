@@ -1,4 +1,4 @@
-const FormInput = ({ label, className, type = "text", ...props }) => {
+const FormInput = ({ label="", className, type = "text", ...props }) => {
   return (
     <label className="block font-sans text-sm font-semibold">
       {label}

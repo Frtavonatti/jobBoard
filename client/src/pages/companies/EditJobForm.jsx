@@ -4,13 +4,14 @@ import { useAuth } from "../../context/AuthContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
 import JobForm from "../../components/form/NewJobForm";
-import FormActions from "../../components/form/inputs/FormActions";
+import JobQuestionManager from "../../components/JobQuestionManager";
 
 const EditJobForm = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const [, dispatchNotification] = useNotificationContext();
   const navigate = useNavigate();
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(null);
 
   useEffect(() => {
@@ -28,6 +29,9 @@ const EditJobForm = () => {
       [name]: value,
     });
   };
+
+  const goToNextStep = () => setStep(step + 1);
+  const goToPreviousStep = () => setStep(step - 1);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,16 +55,23 @@ const EditJobForm = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="mb-6 text-2xl font-bold">Edit Job</h1>
-      <JobForm
-        formData={formData}
-        handleChange={handleChange}
-      />
-      <FormActions
-        onSubmit={handleSubmit}
-        formData={formData}
-        submitText="Update Job"
-        onCancel={() => navigate('/')}
-      />
+      { step === 1 ? (
+        <JobForm 
+          formData={formData} 
+          handleChange={handleChange}
+          goToNextStep={goToNextStep}
+          onCancel={() => navigate("/")}
+        />
+        ) : (
+        <JobQuestionManager 
+          onSubmit={handleSubmit}
+          submitText="Update Job"
+          formData={formData}
+          setFormdata={setFormData}
+          goToPreviousStep={goToPreviousStep}
+          onCancel={() => navigate("/")}
+        />
+      )}
     </div>
   );
 };
