@@ -1,5 +1,9 @@
 # Job Board Features
 
+### General fixes: 
+- [ ] Update job should add the new questions
+- [ ] Improve questions preview UI
+
 ## Authentication & Security
 - [x] Implement protected routes in frontend
 - [ ] Check if its necessary to protect routes in backend

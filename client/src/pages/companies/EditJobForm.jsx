@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
 import JobForm from "../../components/form/NewJobForm";
-import JobQuestionManager from "../../components/JobQuestionManager";
+import JobQuestionManager from "../../components/JobQuestions/JobQuestionManager";
 
 const EditJobForm = () => {
   const { id } = useParams();
