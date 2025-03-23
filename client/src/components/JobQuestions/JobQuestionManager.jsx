@@ -44,6 +44,14 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
     }
   };
 
+  const handleCancelEdit = () => {
+    setCurrentQuestion(initialQuestionState);
+    setEditMode(false);
+    setEditIndex(null);
+    setCurrentOption("");
+  };
+
+  // QUESTION EDITING ACTIONS
   const handleEditQuestion = (index) => {
     setCurrentQuestion(questions[index]);
     setEditMode(true);
@@ -54,13 +62,6 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
     const updatedQuestions = [...questions];
     updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
-  };
-
-  const handleCancelEdit = () => {
-    setCurrentQuestion(initialQuestionState);
-    setEditMode(false);
-    setEditIndex(null);
-    setCurrentOption("");
   };
 
   const handleAddQuestion = (e) => {
@@ -77,26 +78,45 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
       return;
     }
     
-    if (editMode) {
-      // Update existing question
+    if (editMode) { // Update existing question
       const updatedQuestions = [...questions];
       updatedQuestions[editIndex] = currentQuestion;
       setQuestions(updatedQuestions);
       setEditMode(false);
       setEditIndex(null);
-    } else {
-      // Add new question
+    } else { // Add new question
       setQuestions(questions.concat(currentQuestion));
     }
 
     setCurrentQuestion(initialQuestionState);
     setCurrentOption("");
   }
+
+  // OPTIONS EDITING ACTIONS
+  const handleAddOption = (e) => {
+    e.preventDefault();
+    if (currentOption.trim() !== "") {
+      setCurrentQuestion({
+        ...currentQuestion,
+        options: [...currentQuestion.options, currentOption.trim()]
+      });
+      setCurrentOption("");
+    }
+  };
+
+  const handleRemoveOption = (index) => {
+    const updatedOptions = [...currentQuestion.options];
+    updatedOptions.splice(index, 1);
+    setCurrentQuestion({
+      ...currentQuestion,
+      options: updatedOptions
+    });
+  };
   
   // Wrapper for handleSubmit that ensures formData includes the questions
   const handleFormSubmit = (e) => {
     if (e) e.preventDefault();
-    
+
     const updatedFormData = {
       ...formData,
       questions: questions
@@ -118,10 +138,11 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
       <QuestionForm
         currentQuestion={currentQuestion}
         currentOption={currentOption}
-        setCurrentQuestion={setCurrentQuestion}
         setCurrentOption={setCurrentOption}
         handleChange={handleChange}
         handleAddQuestion={handleAddQuestion}
+        handleAddOption={handleAddOption}
+        handleRemoveOption={handleRemoveOption}
         editMode={editMode}
         editIndex={editIndex}
         handleCancelEdit={handleCancelEdit}

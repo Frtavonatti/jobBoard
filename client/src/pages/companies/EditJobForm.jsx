@@ -33,14 +33,17 @@ const EditJobForm = () => {
   const goToNextStep = () => setStep(step + 1);
   const goToPreviousStep = () => setStep(step - 1);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event, updatedData = null) => {
     event.preventDefault();
     try {
-      await jobService.updateJob(id, formData, user.token);
-      dispatchNotification({
-        type: "SHOW_NOTIFICATION",
-        payload: `Job "${formData.title}" updated successfully`,
-      });
+      const dataToSubmit = updatedData || formData;
+      const editedJob = await jobService.updateJob(id, dataToSubmit, user.token);
+      if (editedJob) {
+        dispatchNotification({
+          type: "SHOW_NOTIFICATION",
+          payload: `Job "${formData.title}" updated successfully`,
+        });
+      }
       navigate(`/jobs/${id}`);
     } catch (error) {
       dispatchNotification({

@@ -1,7 +1,7 @@
 # Job Board Features
 
 ### General fixes: 
-- [ ] Update job should add the new questions **current**
+- [x] Update job should add the new questions
 - [ ] Improve questions preview UI
 
 ## Authentication & Security

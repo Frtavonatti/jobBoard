@@ -5,35 +5,16 @@ import FormSelect from "../form/inputs/FormSelect"
 
 const QuestionForm = ({ 
   currentQuestion, 
-  setCurrentQuestion, 
   currentOption, 
   setCurrentOption, 
   handleChange, 
   handleAddQuestion, 
+  handleAddOption,
+  handleRemoveOption,
   editMode, 
   editIndex, 
   handleCancelEdit
  }) => {
-  
-  const handleAddOption = (e) => {
-    e.preventDefault();
-    if (currentOption.trim() !== "") {
-      setCurrentQuestion({
-        ...currentQuestion,
-        options: [...currentQuestion.options, currentOption.trim()]
-      });
-      setCurrentOption("");
-    }
-  };
-
-  const handleRemoveOption = (index) => {
-    const updatedOptions = [...currentQuestion.options];
-    updatedOptions.splice(index, 1);
-    setCurrentQuestion({
-      ...currentQuestion,
-      options: updatedOptions
-    });
-  };
 
   const shouldShowOptions = currentQuestion.questionType === "multipleChoice" 
     || currentQuestion.questionType === "boolean";

@@ -10,7 +10,7 @@ const FormActions = ({
       <button 
         type="button"
         onClick={onCancel}
-        className="btn bg-red-800"
+        className="btn bg-red-800 text-white"
       > {cancelText}
       </button>
     
@@ -20,7 +20,6 @@ const FormActions = ({
           className="btn"
         > Previous
         </button>
-
 
         <button 
           type="button"
