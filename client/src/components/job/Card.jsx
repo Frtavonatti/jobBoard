@@ -47,7 +47,7 @@ const Card = ({ job }) => {
             </p>
           </div>
 
-          {(user.profile.id === job.company_id) && (
+          {user.profile.id === job.company_id && (
             <CardActions job={job} removeJob={removeJob} />
           )}
         </div>

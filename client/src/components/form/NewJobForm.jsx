@@ -2,12 +2,13 @@ import FormInput from "./inputs/FormInput";
 import FormSelect from "./inputs/FormSelect";
 import FormTextArea from "./inputs/FormTextArea";
 
-const NewJobForm = ({ 
-  formData, 
-  handleSubmit, 
+const NewJobForm = ({
+  formData,
+  handleSubmit,
   handleChange,
-  goToNextStep, 
-  onCancel}) => {
+  goToNextStep,
+  onCancel,
+}) => {
   const experienceLevels = ["Entry Level", "Mid Level", "Senior Level"];
   const jobTypes = ["Full-time", "Part-time", "Internship"];
 
@@ -83,15 +84,13 @@ const NewJobForm = ({
       />
 
       <div className="col-span-full flex justify-end gap-2">
-        <button
-          onClick={onCancel}
-          className="btn"
-        > Cancel
+        <button onClick={onCancel} className="btn">
+          {" "}
+          Cancel
         </button>
-        <button
-          onClick={() => goToNextStep()}
-          className="btn btn-primary"
-        > Next
+        <button onClick={() => goToNextStep()} className="btn btn-primary">
+          {" "}
+          Next
         </button>
       </div>
     </form>

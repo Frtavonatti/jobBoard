@@ -13,11 +13,11 @@ const JobList = ({ jobs, pageTitle, searchTerm, handleSearch }) => {
     <div className="px-8">
       <div className="mt-8 flex items-center justify-between">
         <h2 className="text-4xl font-bold">{pageTitle}</h2>
-        { user && user.role === "company" &&
+        {user && user.role === "company" && (
           <Link to="/new">
             <button className="btn">Create a JobPost</button>
           </Link>
-        }
+        )}
       </div>
 
       <form>
@@ -32,7 +32,7 @@ const JobList = ({ jobs, pageTitle, searchTerm, handleSearch }) => {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filteredJobs.map((job) => (
-          <Card key={job.id} job={job}/>
+          <Card key={job.id} job={job} />
         ))}
       </div>
     </div>

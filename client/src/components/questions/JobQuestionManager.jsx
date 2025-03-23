@@ -1,16 +1,23 @@
-import { useState, useEffect } from "react"
-import QuestionsPreview from "./QuestionsPreview"
-import QuestionForm from "./QuestionForm"
-import FormActions from "../form/inputs/FormActions"
+import { useState, useEffect } from "react";
+import QuestionsPreview from "./QuestionsPreview";
+// import QuestionsPreview from "./index"
+import QuestionForm from "./QuestionForm";
+import FormActions from "../form/inputs/FormActions";
 
-const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, onCancel }) => {
+const JobQuestionManager = ({
+  formData,
+  onSubmit,
+  submitText,
+  goToPreviousStep,
+  onCancel,
+}) => {
   const initialQuestionState = {
     questionText: "",
     questionType: "text",
     required: true,
-    options: []
-  }
-  const [questions, setQuestions] = useState([]);  
+    options: [],
+  };
+  const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(initialQuestionState);
   const [currentOption, setCurrentOption] = useState("");
   const [editMode, setEditMode] = useState(false);
@@ -24,22 +31,22 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name === "questionType") {
-      setCurrentQuestion({ 
+      setCurrentQuestion({
         ...currentQuestion,
         [name]: value,
-        options: value === "text" ? [] : currentQuestion.options
+        options: value === "text" ? [] : currentQuestion.options,
       });
     } else if (name === "required") {
       setCurrentQuestion({
         ...currentQuestion,
-        [name]: value === "true"
+        [name]: value === "true",
       });
     } else {
-      setCurrentQuestion({ 
+      setCurrentQuestion({
         ...currentQuestion,
-        [name]: value 
+        [name]: value,
       });
     }
   };
@@ -66,31 +73,36 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
 
   const handleAddQuestion = (e) => {
     e.preventDefault();
-    
+
     if (!currentQuestion.questionText.trim()) {
       alert("Please enter question text");
       return;
     }
-    
-    if ((currentQuestion.questionType === "multipleChoice" || currentQuestion.questionType === "boolean") 
-        && currentQuestion.options.length < 2) {
+
+    if (
+      (currentQuestion.questionType === "multipleChoice" ||
+        currentQuestion.questionType === "boolean") &&
+      currentQuestion.options.length < 2
+    ) {
       alert("Please add at least 2 options for this question type");
       return;
     }
-    
-    if (editMode) { // Update existing question
+
+    if (editMode) {
+      // Update existing question
       const updatedQuestions = [...questions];
       updatedQuestions[editIndex] = currentQuestion;
       setQuestions(updatedQuestions);
       setEditMode(false);
       setEditIndex(null);
-    } else { // Add new question
+    } else {
+      // Add new question
       setQuestions(questions.concat(currentQuestion));
     }
 
     setCurrentQuestion(initialQuestionState);
     setCurrentOption("");
-  }
+  };
 
   // OPTIONS EDITING ACTIONS
   const handleAddOption = (e) => {
@@ -98,7 +110,7 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
     if (currentOption.trim() !== "") {
       setCurrentQuestion({
         ...currentQuestion,
-        options: [...currentQuestion.options, currentOption.trim()]
+        options: [...currentQuestion.options, currentOption.trim()],
       });
       setCurrentOption("");
     }
@@ -109,25 +121,24 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
     updatedOptions.splice(index, 1);
     setCurrentQuestion({
       ...currentQuestion,
-      options: updatedOptions
+      options: updatedOptions,
     });
   };
-  
+
   // Wrapper for handleSubmit that ensures formData includes the questions
   const handleFormSubmit = (e) => {
     if (e) e.preventDefault();
 
     const updatedFormData = {
       ...formData,
-      questions: questions
+      questions: questions,
     };
 
     onSubmit(e, updatedFormData);
   };
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-100px)]">
-
+    <div className="flex min-h-[calc(100vh-100px)] flex-col">
       <QuestionsPreview
         questions={questions}
         editMode={editMode}
@@ -148,15 +159,15 @@ const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, 
         handleCancelEdit={handleCancelEdit}
       />
 
-      <FormActions 
-        onSubmit={handleFormSubmit} 
+      <FormActions
+        onSubmit={handleFormSubmit}
         onPrevious={goToPreviousStep}
         onCancel={onCancel}
         submitText={submitText}
         className="mt-24"
       />
     </div>
-  )
-}
+  );
+};
 
-export default JobQuestionManager
+export default JobQuestionManager;

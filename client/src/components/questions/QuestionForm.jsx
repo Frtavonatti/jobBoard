@@ -1,37 +1,39 @@
-import OptionForm from "./OptionForm"
-import FormInput from "../form/inputs/FormInput"
-import FormRadio from "../form/inputs/FormRadio"
-import FormSelect from "../form/inputs/FormSelect"
+import OptionForm from "./OptionForm";
+import FormInput from "../form/inputs/FormInput";
+import FormRadio from "../form/inputs/FormRadio";
+import FormSelect from "../form/inputs/FormSelect";
 
-const QuestionForm = ({ 
-  currentQuestion, 
-  currentOption, 
-  setCurrentOption, 
-  handleChange, 
-  handleAddQuestion, 
+const QuestionForm = ({
+  currentQuestion,
+  currentOption,
+  setCurrentOption,
+  handleChange,
+  handleAddQuestion,
   handleAddOption,
   handleRemoveOption,
-  editMode, 
-  editIndex, 
-  handleCancelEdit
- }) => {
-
-  const shouldShowOptions = currentQuestion.questionType === "multipleChoice" 
-    || currentQuestion.questionType === "boolean";
+  editMode,
+  editIndex,
+  handleCancelEdit,
+}) => {
+  const shouldShowOptions =
+    currentQuestion.questionType === "multipleChoice" ||
+    currentQuestion.questionType === "boolean";
 
   return (
     <div>
       <div>
         <form className="flex flex-col gap-4">
-          <h3 className="text-xl font-semibold mb-2">
-            {editMode ? `Edit Question ${editIndex + 1}` : "Create New Question"}
+          <h3 className="mb-2 text-xl font-semibold">
+            {editMode
+              ? `Edit Question ${editIndex + 1}`
+              : "Create New Question"}
           </h3>
-          
-          <FormSelect 
+
+          <FormSelect
             label="Select question type"
             name="questionType"
             onChange={handleChange}
-            options={["text", "boolean", "multipleChoice"]} 
+            options={["text", "boolean", "multipleChoice"]}
             value={currentQuestion.questionType}
           />
 
@@ -51,17 +53,17 @@ const QuestionForm = ({
             handleRemoveOption={handleRemoveOption}
           />
 
-          <div className="flex items-center gap-4 mt-4">
+          <div className="mt-4 flex items-center gap-4">
             <label className="font-medium">Required:</label>
             <div className="flex gap-4">
-              <FormRadio 
+              <FormRadio
                 name="required"
                 value="true"
                 label="Yes"
                 handleChange={handleChange}
                 checked={currentQuestion.required === true}
               />
-              <FormRadio 
+              <FormRadio
                 name="required"
                 value="false"
                 label="No"
@@ -73,16 +75,16 @@ const QuestionForm = ({
 
           <div className="flex justify-end gap-2">
             {editMode && (
-                <button 
-                  onClick={handleCancelEdit}
-                  className="btn mt-4"
-                  type="button"
-                >
-                  Cancel Edit
-                </button>
-              )}
+              <button
+                onClick={handleCancelEdit}
+                className="btn mt-4"
+                type="button"
+              >
+                Cancel Edit
+              </button>
+            )}
 
-            <button 
+            <button
               onClick={handleAddQuestion}
               className="btn btn-primary mt-4"
               type="button"
@@ -90,11 +92,10 @@ const QuestionForm = ({
               {editMode ? "Update Question" : "Add Question"}
             </button>
           </div>
-
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default QuestionForm
+export default QuestionForm;

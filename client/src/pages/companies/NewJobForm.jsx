@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
 import JobForm from "../../components/form/NewJobForm";
-import JobQuestionManager from "../../components/JobQuestions/JobQuestionManager";
+import JobQuestionManager from "../../components/questions/JobQuestionManager";
 
 const NewJobForm = () => {
   const { user } = useAuth();
@@ -45,7 +45,7 @@ const NewJobForm = () => {
       });
       return;
     }
-    
+
     try {
       const dataToSubmit = updatedFormData || formData;
 
@@ -67,16 +67,16 @@ const NewJobForm = () => {
 
   return (
     <div className="mb-6 px-8">
-      <h3 className="m-8 text-2xl font-bold">New Listing</h3>      
-      { step === 1 ? (
-        <JobForm 
-          formData={formData} 
+      <h3 className="m-8 text-2xl font-bold">New Listing</h3>
+      {step === 1 ? (
+        <JobForm
+          formData={formData}
           handleChange={handleChange}
           goToNextStep={goToNextStep}
           onCancel={() => navigate("/")}
         />
-        ) : (
-        <JobQuestionManager 
+      ) : (
+        <JobQuestionManager
           onSubmit={handleSubmit}
           submitText={"Create Job"}
           formData={formData}

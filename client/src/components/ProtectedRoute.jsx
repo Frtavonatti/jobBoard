@@ -2,7 +2,10 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import LoadingSpinner from "./ui/LoadingSpinner";
 
-export const ProtectedRoute = ({ allowedRoles = [], redirectPath = "/login" }) => {
+export const ProtectedRoute = ({
+  allowedRoles = [],
+  redirectPath = "/login",
+}) => {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {

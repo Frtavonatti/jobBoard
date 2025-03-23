@@ -14,7 +14,7 @@ const SignUpPage = () => {
     industry: "",
     // Candidates fields
     first_name: "",
-    last_name: ""
+    last_name: "",
   });
 
   // TODO: Implement Error Handling Notifications
@@ -31,7 +31,7 @@ const SignUpPage = () => {
   const handleProfileChange = (event) => {
     const { name, value } = event.target;
     setProfileData({ ...profileData, [name]: value });
-  }
+  };
 
   return (
     <div className="mt-28 min-h-full rounded-lg border border-solid border-white px-6 py-12 md:mx-28 lg:px-8">
@@ -74,52 +74,50 @@ const SignUpPage = () => {
             </div>
 
             {role === "company" ? (
-            <>
-              <FormInput 
-                label="Company Name"
-                name="name"
-                type="text"
-                autoComplete="organization"
-                required
-                value={profileData.name}
-                onChange={handleProfileChange}
-              />
+              <>
+                <FormInput
+                  label="Company Name"
+                  name="name"
+                  type="text"
+                  autoComplete="organization"
+                  required
+                  value={profileData.name}
+                  onChange={handleProfileChange}
+                />
 
-              <FormInput
-                label="Industry"
-                name="industry"
-                type="text"
-                autoComplete="organization-title"
-                required
-                value={profileData.industry}
-                onChange={handleProfileChange}
-              />
-            </>
-          ) 
-          : (
-            <>
-              <FormInput
-                label="First Name"
-                name="first_name"
-                type="text"
-                autoComplete="given-name"
-                required
-                value={profileData.first_name}
-                onChange={handleProfileChange}
-              />
+                <FormInput
+                  label="Industry"
+                  name="industry"
+                  type="text"
+                  autoComplete="organization-title"
+                  required
+                  value={profileData.industry}
+                  onChange={handleProfileChange}
+                />
+              </>
+            ) : (
+              <>
+                <FormInput
+                  label="First Name"
+                  name="first_name"
+                  type="text"
+                  autoComplete="given-name"
+                  required
+                  value={profileData.first_name}
+                  onChange={handleProfileChange}
+                />
 
-              <FormInput
-                label="Last Name"
-                name="last_name"
-                type="text"
-                autoComplete="family-name"
-                required
-                value={profileData.last_name}
-                onChange={handleProfileChange}
-              /> 
-            </>
-          )}
-
+                <FormInput
+                  label="Last Name"
+                  name="last_name"
+                  type="text"
+                  autoComplete="family-name"
+                  required
+                  value={profileData.last_name}
+                  onChange={handleProfileChange}
+                />
+              </>
+            )}
 
             <button type="submit" className="btn btn-primary">
               {" "}

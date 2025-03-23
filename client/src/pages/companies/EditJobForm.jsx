@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useNotificationContext } from "../../context/NotificationContext";
 import jobService from "../../services/jobs";
 import JobForm from "../../components/form/NewJobForm";
-import JobQuestionManager from "../../components/JobQuestions/JobQuestionManager";
+import JobQuestionManager from "../../components/questions/JobQuestionManager";
 
 const EditJobForm = () => {
   const { id } = useParams();
@@ -37,7 +37,11 @@ const EditJobForm = () => {
     event.preventDefault();
     try {
       const dataToSubmit = updatedData || formData;
-      const editedJob = await jobService.updateJob(id, dataToSubmit, user.token);
+      const editedJob = await jobService.updateJob(
+        id,
+        dataToSubmit,
+        user.token,
+      );
       if (editedJob) {
         dispatchNotification({
           type: "SHOW_NOTIFICATION",
@@ -58,15 +62,15 @@ const EditJobForm = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="mb-6 text-2xl font-bold">Edit Job</h1>
-      { step === 1 ? (
-        <JobForm 
-          formData={formData} 
+      {step === 1 ? (
+        <JobForm
+          formData={formData}
           handleChange={handleChange}
           goToNextStep={goToNextStep}
           onCancel={() => navigate("/")}
         />
-        ) : (
-        <JobQuestionManager 
+      ) : (
+        <JobQuestionManager
           onSubmit={handleSubmit}
           submitText="Update Job"
           formData={formData}

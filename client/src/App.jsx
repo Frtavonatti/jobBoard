@@ -27,28 +27,35 @@ function App() {
           {/* Public routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          
+
           {/* Protected routes for all authenticated users */}
           <Route element={<ProtectedRoute />}>
             <Route path="/" element={<JobListPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />
             <Route path="/jobs/:id/apply" element={<ApplicationForm />} />
           </Route>
-          
+
           {/* Protected routes only for companies */}
           <Route element={<ProtectedRoute allowedRoles={["company"]} />}>
             <Route path="/myjobs" element={<MyJobsList />} />
             <Route path="/jobs/:id/edit" element={<EditJobForm />} />
             <Route path="/new" element={<NewJobForm />} />
           </Route>
-          
+
           {/* Fallback routes: */}
           <Route path="/not-found" element={<NotFound />} />
-          
+
           {/* Catch-all redirect: to NotFound if authenticated, to login if not */}
-          <Route path="*" element={
-            user ? <Navigate to="/not-found" replace /> : <Navigate to="/login" replace />
-          } />
+          <Route
+            path="*"
+            element={
+              user ? (
+                <Navigate to="/not-found" replace />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
         </Routes>
       </Layout>
     </>

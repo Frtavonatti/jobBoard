@@ -1,18 +1,18 @@
-import TextQuestion from './TextQuestion';
-import MultipleChoiceQuestion from './MultipleChoiceQuestion';
-import CheckboxQuestion from './CheckboxQuestion';
+import TextQuestion from "./TextQuestion";
+import MultipleChoiceQuestion from "./MultipleChoiceQuestion";
+import CheckboxQuestion from "./CheckboxQuestion";
 
 const QuestionRenderer = ({ question, value, onChange }) => {
   const getDefaultValue = () => {
-    if (question.questionType === 'multipleChoice') return '';
-    if (question.questionType === 'boolean') return [];
-    return '';
+    if (question.questionType === "multipleChoice") return "";
+    if (question.questionType === "boolean") return [];
+    return "";
   };
 
   const questionValue = value || getDefaultValue();
 
   switch (question.questionType) {
-    case 'text':
+    case "text":
       return (
         <TextQuestion
           question={question}
@@ -21,7 +21,7 @@ const QuestionRenderer = ({ question, value, onChange }) => {
           required={question.required}
         />
       );
-    case 'multipleChoice':
+    case "multipleChoice":
       return (
         <MultipleChoiceQuestion
           question={question}
@@ -30,7 +30,7 @@ const QuestionRenderer = ({ question, value, onChange }) => {
           required={question.required}
         />
       );
-    case 'boolean':
+    case "boolean":
       return (
         <CheckboxQuestion
           question={question}

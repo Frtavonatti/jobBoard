@@ -1,16 +1,16 @@
 const MultipleChoiceQuestion = ({ question, value, onChange, required }) => {
   const questionId = question._id || question.id;
-  
+
   return (
     <div className="mb-4">
-      <p className="block font-sans text-sm font-semibold mb-2">
+      <p className="mb-2 block font-sans text-sm font-semibold">
         {question.questionText}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && <span className="ml-1 text-red-500">*</span>}
       </p>
       <div className="ml-2">
         {question.options.map((option, index) => (
           <div key={index} className="mb-1">
-            <label className="flex items-center cursor-pointer">
+            <label className="flex cursor-pointer items-center">
               <input
                 type="radio"
                 name={questionId}
@@ -18,7 +18,7 @@ const MultipleChoiceQuestion = ({ question, value, onChange, required }) => {
                 checked={value === option}
                 onChange={onChange}
                 required={required}
-                className="radio radio-primary mr-2"
+                className="radio-primary radio mr-2"
               />
               <span>{option}</span>
             </label>

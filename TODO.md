@@ -2,7 +2,7 @@
 
 ### General fixes: 
 - [x] Update job should add the new questions
-- [ ] Improve questions preview UI
+- [x] Improve questions preview UI
 
 ## Authentication & Security
 - [x] Implement protected routes in frontend
@@ -23,9 +23,9 @@
 ### Frontend
 #### Companies View
 - [x] Design interface for creating questions
-- [ ] Improve interface for editing questions **next**
+- [x] Improve interface for editing questions
 - [ ] Allow companies to view applications for each job post (include drag and drop)
-- [ ] Design interface for reviewing answers 
+- [ ] Design interface for reviewing answers
 #### Candidates View
 - [ ] Create 'My Applications' page to view submitted applications
 - [ ] Design interface for answering questions dynamically

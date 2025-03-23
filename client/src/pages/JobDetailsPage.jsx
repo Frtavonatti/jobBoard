@@ -29,10 +29,9 @@ const JobDetailsPage = () => {
 
   return (
     <div className="text-start">
-
       {/* JOB DETAILS SECTION */}
       <section className="mb-6 p-8">
-        <div className="flex justify-between items-center mb-4">
+        <div className="mb-4 flex items-center justify-between">
           <div className="mb-4 flex flex-col">
             <div className="flex items-center gap-2">
               <p className="text-lg font-semibold">{job.company}</p>
@@ -40,11 +39,18 @@ const JobDetailsPage = () => {
                 Follow
               </a>
             </div>
-            <p className="text-sm text-gray-500">{job.datePosted.split("T")[0]}</p>
+            <p className="text-sm text-gray-500">
+              {job.datePosted.split("T")[0]}
+            </p>
           </div>
-          
-          { user && user.role === 'company' && (
-            <button onClick={() => navigate(`/jobs/${id}/edit`)} className="btn">Edit</button>
+
+          {user && user.role === "company" && (
+            <button
+              onClick={() => navigate(`/jobs/${id}/edit`)}
+              className="btn"
+            >
+              Edit
+            </button>
           )}
         </div>
 
@@ -62,15 +68,11 @@ const JobDetailsPage = () => {
           <strong>Salary:</strong> {job.salary} USD/month
         </p>
 
-        {user && user.role === 'candidate' && (
-          <button  
-            onClick={() => navigate(`/jobs/${id}/apply`)}
-            className="btn"
-          >
+        {user && user.role === "candidate" && (
+          <button onClick={() => navigate(`/jobs/${id}/apply`)} className="btn">
             Apply
           </button>
-          )           
-        }
+        )}
       </section>
 
       {/* DESCRIPTION SECTION */}
@@ -114,7 +116,9 @@ const JobDetailsPage = () => {
       {job.questions && (
         <section className="mb-6 px-8">
           <div>
-            <h2 className="mb-2 text-2xl font-semibold">Application Questions</h2>
+            <h2 className="mb-2 text-2xl font-semibold">
+              Application Questions
+            </h2>
             <ul className="list-inside list-disc pl-5">
               {job.questions.map((question, index) => (
                 <li key={index} className="mb-1 text-lg">
