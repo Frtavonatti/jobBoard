@@ -2,6 +2,19 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:3001/api/applications";
 
+const getJobApplications = async (jobId, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  try {
+    const response = await axios.get(`${baseUrl}/jobs/${jobId}`, config);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+  }
+}
+
 const applyToJob = async (jobId, application, token) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -19,4 +32,4 @@ const applyToJob = async (jobId, application, token) => {
   }
 };
 
-export default { applyToJob };
+export default { applyToJob, getJobApplications };

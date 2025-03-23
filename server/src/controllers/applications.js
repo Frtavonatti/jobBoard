@@ -1,7 +1,7 @@
 const applicationsRouter = require('express').Router();
 const Application = require('../models/application');
 const asyncHandler = require('../middleware/asyncHandler');
-const { verifyToken } = require('../middleware/auth');
+const { verifyToken, findCompany, verifyCompanyRole, verifyJobOwnership } = require('../middleware/auth');
 const { validateApplication } = require('../utils/applicationUtils');
 
 // GET all applications
@@ -15,7 +15,16 @@ applicationsRouter.get('/:id', asyncHandler(async (req, res) => {
   const id = req.params.id;
   const application = await Application.findById(id);
   res.status(200).json(application);
-})); 
+}));
+
+// GET applications for a job
+applicationsRouter.get('/jobs/:jobId', 
+  [ verifyToken ], // add findCompany, verifyCompanyRole, verifyJobOwnership 
+  asyncHandler(async (req, res) => {
+  const jobId = req.params.jobId;
+  const applications = await Application.find({ job_id: jobId });
+  res.status(200).json(applications);
+}));
 
 // POST new application
 applicationsRouter.post('/:jobId/apply', verifyToken, asyncHandler(async (req, res) => {

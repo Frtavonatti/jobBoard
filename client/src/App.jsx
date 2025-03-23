@@ -9,6 +9,7 @@ import ApplicationForm from "./pages/candidates/ApplicationForm";
 import MyJobsList from "./pages/companies/MyJobsList";
 import NewJobForm from "./pages/companies/NewJobForm";
 import EditJobForm from "./pages/companies/EditJobForm";
+import Applications from "./pages/companies/Applications";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/myjobs" element={<MyJobsList />} />
             <Route path="/jobs/:id/edit" element={<EditJobForm />} />
             <Route path="/new" element={<NewJobForm />} />
+            <Route path="/jobs/:id/applications" element={<Applications />} />
           </Route>
 
           {/* Fallback routes: */}

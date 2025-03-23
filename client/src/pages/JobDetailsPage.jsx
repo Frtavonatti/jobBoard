@@ -129,6 +129,19 @@ const JobDetailsPage = () => {
           </div>
         </section>
       )}
+
+      {user.role === "company" && (
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => navigate(`/jobs/${id}/applications`)}
+            className="btn btn-primary"
+          >
+            View Applicants
+          </button>
+        </div>
+
+      )}
+
     </div>
   );
 };

@@ -20,6 +20,18 @@ const getOneJob = async (id) => {
   }
 };
 
+const getJobApplications = async (id, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  try {
+    const response = await axios.get(`${baseUrl}/${id}/applications`, config);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+  }
+}
+
 const getMyJobs = async (token) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -71,6 +83,7 @@ const deleteJob = async (id, token) => {
 export default {
   getJobs,
   getOneJob,
+  getJobApplications,
   getMyJobs,
   createJob,
   updateJob,
