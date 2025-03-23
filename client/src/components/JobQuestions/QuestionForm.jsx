@@ -1,7 +1,7 @@
 import OptionForm from "./OptionForm"
-import FormInput from "./form/inputs/FormInput"
-import FormRadio from "./form/inputs/FormRadio"
-import FormSelect from "./form/inputs/FormSelect"
+import FormInput from "../form/inputs/FormInput"
+import FormRadio from "../form/inputs/FormRadio"
+import FormSelect from "../form/inputs/FormSelect"
 
 const QuestionForm = ({ 
   currentQuestion, 

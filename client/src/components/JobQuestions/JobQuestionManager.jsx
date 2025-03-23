@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import QuestionsPreview from "../QuestionsPreview"
-import QuestionForm from "../QuestionForm"
+import QuestionsPreview from "./QuestionsPreview"
+import QuestionForm from "./QuestionForm"
 import FormActions from "../form/inputs/FormActions"
 
 const JobQuestionManager = ({ formData, onSubmit, submitText, goToPreviousStep, onCancel }) => {
