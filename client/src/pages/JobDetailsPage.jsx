@@ -131,7 +131,7 @@ const JobDetailsPage = () => {
       )}
 
       {user.role === "company" && (
-        <div className="flex justify-center mt-8">
+        <div className="mt-8 flex justify-center">
           <button
             onClick={() => navigate(`/jobs/${id}/applications`)}
             className="btn btn-primary"
@@ -139,9 +139,7 @@ const JobDetailsPage = () => {
             View Applicants
           </button>
         </div>
-
       )}
-
     </div>
   );
 };

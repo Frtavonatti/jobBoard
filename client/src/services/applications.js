@@ -13,7 +13,7 @@ const getJobApplications = async (jobId, token) => {
   } catch (error) {
     console.error("Error fetching applications:", error);
   }
-}
+};
 
 const applyToJob = async (jobId, application, token) => {
   const config = {

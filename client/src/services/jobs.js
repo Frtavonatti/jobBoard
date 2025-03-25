@@ -30,7 +30,7 @@ const getJobApplications = async (id, token) => {
   } catch (error) {
     console.error("Error fetching applications:", error);
   }
-}
+};
 
 const getMyJobs = async (token) => {
   const config = {

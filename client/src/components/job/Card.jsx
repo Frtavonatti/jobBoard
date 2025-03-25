@@ -11,9 +11,6 @@ const Card = ({ job }) => {
   const [{ jobs }, dispatch] = useJobContext();
   const [, dispatchNotification] = useNotificationContext();
 
-  console.log('job:', jobs)
-  console.log('user:', user)
-
   const removeJob = async (id, title) => {
     if (
       window.confirm(
@@ -39,7 +36,10 @@ const Card = ({ job }) => {
   };
 
   return (
-    <Link to={`/jobs/${job.id}`} className="mt-6 flex min-w-[320px] flex-col rounded-md border p-4 dark:border-slate-800">
+    <Link
+      to={`/jobs/${job.id}`}
+      className="mt-6 flex min-w-[320px] flex-col rounded-md border p-4 dark:border-slate-800"
+    >
       <div className="flex flex-col">
         <div className="flex justify-between">
           <div className="mb-1 ml-2 flex flex-col text-left">
@@ -67,7 +67,7 @@ const Card = ({ job }) => {
           <button className="btn">View More</button>
         </Link>
 
-        {user.role === 'company' && user.profile.name === job.company && ( 
+        {user.role === "company" && user.profile.name === job.company && (
           <Link to={`/jobs/${job.id}/applications`}>
             <button className="btn btn-primary ml-2">View Applicants</button>
           </Link>
