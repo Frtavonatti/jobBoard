@@ -3,6 +3,7 @@
 ### General fixes: 
 - [x] Update job should add the new questions
 - [x] Improve questions preview UI
+- [x] Fix: Solve dark-light mode bug (its not possible to assign darkmode to especific elements)
 
 ## Authentication & Security
 - [x] Implement protected routes in frontend
@@ -24,11 +25,11 @@
 #### Companies View
 - [x] Design interface for creating questions
 - [x] Improve interface for editing questions
-- [ ] Allow companies to view applications for each job post (include drag and drop)
-- [ ] Design interface for reviewing answers
+- [x] Allow companies to view applications for each job post (include drag and drop)
+- [ ] Design interface for reviewing answers **current**
 #### Candidates View
 - [ ] Create 'My Applications' page to view submitted applications
-- [ ] Design interface for answering questions dynamically
+- [x] Design interface for answering questions dynamically
 - [ ] Track application status (applied, reviewed, rejected, etc.)
 
 #### UI Components

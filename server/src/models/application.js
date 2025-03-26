@@ -9,7 +9,7 @@ const answerSchema = new mongoose.Schema({
 const applicationSchema = new mongoose.Schema({
   job_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' },
   candidate_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Candidate' },
-  status: { type: String, enum: ['applied', 'interview', 'accepted', 'rejected'], default: 'applied' },
+  status: { type: String, enum: ['applied', 'screening', 'interview', 'hired', 'discarded'], default: 'applied' },
   date: { type: Date, required: true },
   data: { 
     firstName: String,

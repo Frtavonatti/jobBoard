@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {},
   },
@@ -10,9 +11,9 @@ export default {
       {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
-          "base-100": "#ffffff",
-          "base-200": "#f9fafb",
-          "base-300": "#f3f4f6",
+          "base-100": "#f9fafb",
+          "base-200": "#f3f4f6",
+          "base-300": "#e5e7eb",
         }
       },
       {
