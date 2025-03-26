@@ -26,9 +26,13 @@
 - [x] Design interface for creating questions
 - [x] Improve interface for editing questions
 - [x] Allow companies to view applications for each job post (include drag and drop)
+- [ ] Implement feature to update application status from drag and drop **next**
 - [ ] Design interface for reviewing answers **current**
+- [ ] Implement interactivy for review application page
+
 #### Candidates View
 - [ ] Create 'My Applications' page to view submitted applications
+- [ ] Create 'My Profile' section to allow users modify its personal data
 - [x] Design interface for answering questions dynamically
 - [ ] Track application status (applied, reviewed, rejected, etc.)
 

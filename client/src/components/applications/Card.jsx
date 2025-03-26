@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
-import { draggable } from "@atlaskit/pragmatic-drag-and-drop/element/adapter"; // monitorForElements
+import { Link } from "react-router-dom";
+import { draggable } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import getTimeDiff from "../../utils/getTimeDiff";
 
 const Card = ({ application }) => {
   const ref = useRef(null);
@@ -21,38 +23,26 @@ const Card = ({ application }) => {
     });
   }, [application]);
 
-  const getTimeDiff = () => {
-    const now = new Date();
-    const applicationDate = new Date(application.date);
-    const diffInMinutes = Math.floor((now - applicationDate) / (1000 * 60));
-    const diffInHours = Math.floor((now - applicationDate) / (1000 * 60 * 60));
-
-    if (diffInHours < 1) {
-      return `${diffInMinutes} minutes ago`;
-    } else if (diffInHours < 24) {
-      return `${diffInHours} hours ago`;
-    } else {
-      const diffInDays = Math.floor(diffInHours / 24);
-      return `${diffInDays} days ago`;
-    }
-  };
 
   return (
-    <>
-      <div
-        ref={ref}
-        className={`my-4 rounded-md border p-4 ${isDragging ? "opacity-50" : ""}`}
-      >
-        <h3 className="flex text-xl font-semibold">
-          {application.data.firstName} {application.data.lastName}
-        </h3>
-        <div className="flex justify-end">
-          <span className="text-sm font-semibold text-red-700">
-            {getTimeDiff()}{" "}
-          </span>
-        </div>
+    <Link
+      to={`/applications/${application.id}`}
+      ref={ref}
+      className={`
+        bg-gray-300 dark:bg-slate-700
+        rounded-md border-gray-400 border p-4 
+        transition-all duration-200
+        ${isDragging ? "opacity-20 scale-[1.04] shadow-lg border-3 z-50" : ""}`}
+    >
+      <h3 className="flex text-xl font-semibold dark:text-zinc-50">
+        {application.data.firstName} {application.data.lastName}
+      </h3>
+      <div className="flex justify-end">
+        <span className="text-sm font-semibold text-red-600">
+          {getTimeDiff(application.date)}{" "}
+        </span>
       </div>
-    </>
+    </Link>
   );
 };
 

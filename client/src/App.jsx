@@ -10,10 +10,12 @@ import MyJobsList from "./pages/companies/MyJobsList";
 import NewJobForm from "./pages/companies/NewJobForm";
 import EditJobForm from "./pages/companies/EditJobForm";
 import Applications from "./pages/companies/Applications";
+import ApplicationPreview from "./pages/companies/ApplicationPreview";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Notification from "./components/Notification";
+
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -42,6 +44,7 @@ function App() {
             <Route path="/jobs/:id/edit" element={<EditJobForm />} />
             <Route path="/new" element={<NewJobForm />} />
             <Route path="/jobs/:id/applications" element={<Applications />} />
+            <Route path="/applications/:id" element={<ApplicationPreview />} />
           </Route>
 
           {/* Fallback routes: */}
