@@ -1,5 +1,5 @@
 const jobsRouter = require('express').Router()
-const Job = require('../models/job')
+const { Job } = require('../models/job')
 const { 
   verifyToken, 
   verifyCompanyRole,

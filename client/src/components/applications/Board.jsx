@@ -8,6 +8,7 @@ const columns = [
   { id: "discarded", title: "Discarded" },
   { id: "screening", title: "Screening" },
   { id: "interview", title: "Interview" },
+  { id: "offer", title: "Offer" },
   { id: "hired", title: "Hired" },
 ];
 

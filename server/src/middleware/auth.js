@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { User, Company } = require('../models/user');
-const Job = require('../models/job');
+const { Job } = require('../models/job');
 const { getTokenFrom } = require('../utils/authUtils')
 const asyncHandler = require('./asyncHandler')
 const { 

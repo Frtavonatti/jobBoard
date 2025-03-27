@@ -34,4 +34,6 @@ jobSchema.set('toJSON', {
   }
 })
 
-module.exports = mongoose.model('Job', jobSchema)
+module.exports = {
+  Job: mongoose.model('Job', jobSchema),
+}
