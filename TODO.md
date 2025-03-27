@@ -1,9 +1,10 @@
 # Job Board Features
 
 ### General fixes: 
-- [x] Update job should add the new questions
-- [x] Improve questions preview UI
-- [x] Fix: Solve dark-light mode bug (its not possible to assign darkmode to especific elements)
+- [ ] Implement verifyCandidateRole middleware for candidate applications 
+- [ ] Fix answers questions population (currently being populated by job) **application controller**
+
+
 
 ## Authentication & Security
 - [x] Implement protected routes in frontend

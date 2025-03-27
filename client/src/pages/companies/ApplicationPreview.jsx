@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Phone, Mail, MapPin, ArrowLeft, X } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 import AppService from "../../services/applications";
 import getTimeDiff from "../../utils/getTimeDiff";
 import FormSelect from "../../components/form/inputs/FormSelect";
@@ -9,18 +10,19 @@ import LoadingSpinner from "../../components/ui/LoadingSpinner";
 const ApplicationPreview = () => {
   const { id } = useParams();
   const [application, setApplication] = useState(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchApplication = async () => {
       try {
-        const data = await AppService.getApplication(id);
+        const data = await AppService.getApplication(id, user.token);
         setApplication(data);
       } catch (error) {
         console.error("Error fetching application:", error);
       }
     };
     fetchApplication();
-  }, [id]);
+  }, [id, user.token]);
 
   const handleStatusChange = (e) => {
     console.log(e.target.value);
@@ -71,12 +73,13 @@ const ApplicationPreview = () => {
         </div>
         
         <div className="p-6">
-          <h4 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">
-            Respuestas del candidato
+          <h4 className="text-lg font-bold text-gray-700 dark:text-gray-300 mb-4">
+            Candidate Responses
           </h4>
           <div className="space-y-6">
             {application.answers.map((answer) => (
               <div key={answer.question_id} className="pb-4 border-b border-gray-200 dark:border-gray-700 last:border-0">
+                <h3 className="text-lg font-semibold">{answer.questionText}</h3>
                 <h5 className="text-md font-medium mb-2">{answer.question}</h5>
                 <p>{answer.answer}</p>
               </div>

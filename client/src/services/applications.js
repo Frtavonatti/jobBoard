@@ -2,9 +2,13 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:3001/api/applications";
 
-const getApplication = async (id) => {
+const getApplication = async (id, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
   try {
-    const response = await axios.get(`${baseUrl}/${id}`);
+    const response = await axios.get(`${baseUrl}/${id}`, config);
     return response.data;
   } catch (error) {
     console.error("Error fetching application:", error);
