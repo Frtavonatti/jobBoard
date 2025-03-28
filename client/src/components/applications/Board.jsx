@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import Confetti from "react-confetti";
+import { useAuth } from "../../context/AuthContext";
+import appService from "../../services/applications";
 import Column from "./Column";
 
 const columns = [
@@ -13,11 +15,12 @@ const columns = [
 ];
 
 const ApplicationBoard = ({ applications, setApplications }) => {
+  const { user } = useAuth();
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
-    const cleanup = monitorForElements({
-      onDrop: ({ source, location }) => {
+    return monitorForElements({
+      onDrop: async ({ source, location }) => {
         const destination = location.current.dropTargets[0];
         if (!destination) return;
 
@@ -33,19 +36,28 @@ const ApplicationBoard = ({ applications, setApplications }) => {
 
         if (destinationLocation === sourceLocation) return;
 
-        setApplications([
-          ...restOfApplications,
-          { ...application, status: destinationLocation },
-        ]);
+        try {
+          const updatedApplication = await appService.updateApplicationStatus(
+            application.id,
+            { status: destinationLocation },
+            user.token,
+          );
 
-        if (destinationLocation === "hired") {
-          setShowConfetti(true);
-          setTimeout(() => setShowConfetti(false), 5000);
+          if (updatedApplication.status === "hired") {
+            setShowConfetti(true);
+            setTimeout(() => setShowConfetti(false), 5000);
+          }
+
+          setApplications([
+            ...restOfApplications,
+            updatedApplication,
+          ]);
+        } catch (error) {
+          console.log('Error updating application status:', error);
         }
       },
     });
-    return cleanup;
-  }, [applications, setApplications]);
+  }, [applications, setApplications, user.token]);
 
   return (
     <div className="overflow-x-auto">

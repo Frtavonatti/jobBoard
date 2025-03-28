@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useJobContext } from "../../context/JobContext";
 import { useNotificationContext } from "../../context/NotificationContext";
@@ -8,6 +8,7 @@ import CardActions from "./CardActions";
 
 const Card = ({ job }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [{ jobs }, dispatch] = useJobContext();
   const [, dispatchNotification] = useNotificationContext();
 
@@ -63,14 +64,16 @@ const Card = ({ job }) => {
       </div>
 
       <div className="mt-auto flex justify-end">
-        <Link to={`/jobs/${job.id}`}>
-          <button className="btn">View More</button>
-        </Link>
+        <button 
+          onClick={() => navigate(`/jobs/${job.id}`)}
+          className="btn">View More
+        </button>
 
         {user.role === "company" && user.profile.name === job.company && (
-          <Link to={`/jobs/${job.id}/applications`}>
-            <button className="btn btn-primary ml-2">View Applicants</button>
-          </Link>
+          <button 
+            onClick={() => navigate(`/jobs/${job.id}/applications`)}
+            className="btn btn-primary ml-2">View Applicants
+          </button>
         )}
       </div>
     </Link>

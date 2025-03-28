@@ -45,8 +45,26 @@ const applyToJob = async (jobId, application, token) => {
   }
 };
 
+const updateApplicationStatus = async (id, status, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  try {
+    const response = await axios.put(
+      `${baseUrl}/${id}`,
+      status,
+      config,
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating application status:", error);
+  }
+}
+
 export default { 
   applyToJob, 
   getApplication, 
-  getJobApplications 
+  getJobApplications,
+  updateApplicationStatus, 
 };

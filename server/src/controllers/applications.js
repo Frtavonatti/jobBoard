@@ -89,4 +89,15 @@ applicationsRouter.post('/:jobId/apply',
   res.status(201).json(savedApplication);
 }));
 
+// PUT update application status
+applicationsRouter.put('/:id', 
+  [ verifyToken, verifyCompanyRole, findCompany ],
+  asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const status = req.body.status;
+
+  const updatedApplication = await Application.findByIdAndUpdate(id, { status }, { new: true });
+  res.status(200).json(updatedApplication);
+}));
+
 module.exports = applicationsRouter;

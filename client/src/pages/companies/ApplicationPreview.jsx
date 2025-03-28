@@ -25,12 +25,23 @@ const ApplicationPreview = () => {
   }, [id, user.token]);
 
   const handleStatusChange = (e) => {
-    console.log(e.target.value);
-    // setApplication({ ...application, status: e.target.value });
+    setApplication({ ...application, status: e.target.value });
+  };
+
+  const handleSaveUpdatedStatus = async (newStatus) => {
+    try {
+      const updatedApplication = await AppService.updateApplicationStatus(
+        application._id,
+        { status: newStatus || application.status },
+        user.token
+      );
+      setApplication(updatedApplication);
+    } catch (error) {
+      console.error("Error updating application status:", error);
+    }
   };
 
   if (!application) return <LoadingSpinner />;
-  console.log('application:', application);
 
   return (
     <div className="max-w-4xl mx-auto px-4 pt-8">
@@ -95,16 +106,16 @@ const ApplicationPreview = () => {
               label="Change status"
               name="status"
               value={application.status}
-              onChange={(e) => console.log(e.target.value)}
+              onChange={(e) => handleStatusChange(e)}
               options={["applied", "discarded", "screening", "interview", "offer", "hired"]}
             />
           </div>
           
           <div className="flex items-end">
             <button 
-              onClick={() => console.log("Save")} 
+              onClick={handleSaveUpdatedStatus} 
               className="btn btn-primary"
-            >
+            > 
               Save
             </button>
           </div>
@@ -123,7 +134,7 @@ const ApplicationPreview = () => {
         </button>
         
         <button 
-          onClick={() => console.log("Rechazar candidato")}
+          onClick={() => handleSaveUpdatedStatus('discarded')}
           className="btn bg-red-600 hover:bg-red-700 text-white"
         >
           <span className="flex items-center">
