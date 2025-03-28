@@ -13,7 +13,20 @@ const getApplication = async (id, token) => {
   } catch (error) {
     console.error("Error fetching application:", error);
   }
-}
+};
+
+const getCandidateApplications = async (userId, token) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  try {
+    const response = await axios.get(`${baseUrl}/${userId}`, config);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching applications:", error);
+  }
+};
 
 const getJobApplications = async (jobId, token) => {
   const config = {
@@ -51,20 +64,17 @@ const updateApplicationStatus = async (id, status, token) => {
   };
 
   try {
-    const response = await axios.put(
-      `${baseUrl}/${id}`,
-      status,
-      config,
-    );
+    const response = await axios.put(`${baseUrl}/${id}`, status, config);
     return response.data;
   } catch (error) {
     console.error("Error updating application status:", error);
   }
-}
+};
 
-export default { 
-  applyToJob, 
-  getApplication, 
+export default {
+  applyToJob,
+  getApplication,
+  getCandidateApplications,
   getJobApplications,
-  updateApplicationStatus, 
+  updateApplicationStatus,
 };

@@ -48,12 +48,9 @@ const ApplicationBoard = ({ applications, setApplications }) => {
             setTimeout(() => setShowConfetti(false), 5000);
           }
 
-          setApplications([
-            ...restOfApplications,
-            updatedApplication,
-          ]);
+          setApplications([...restOfApplications, updatedApplication]);
         } catch (error) {
-          console.log('Error updating application status:', error);
+          console.log("Error updating application status:", error);
         }
       },
     });

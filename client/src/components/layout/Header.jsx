@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
 import { logout } from "../../services/users";
 import ToggleThemeIcon from "../ui/ToggleThemeIcon";
 import reactLogo from "../../assets/react.svg";
@@ -18,24 +19,17 @@ const Header = ({ handleTheme, user }) => {
         <details className="dropdown">
           <summary className="btn ml-4">
             {user.email}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="ml-1 inline-block h-4 w-4"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <ChevronDown />
           </summary>
           <ul className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
             <li>
-              <Link to="/myjobs">
-                {user.role === "company" ? "Posted Jobs" : "My Applications"}
-              </Link>
+              {user.role === "company" ? (
+                <Link to="/myjobs">My Jobs</Link>
+              ) : (
+                <Link to={`/myapplications/${user.profile.id}`}>
+                  My Applications
+                </Link>
+              )}
             </li>
             <li>
               <button onClick={logout}>Sign Out</button>

@@ -64,15 +64,16 @@ const Card = ({ job }) => {
       </div>
 
       <div className="mt-auto flex justify-end">
-        <button 
-          onClick={() => navigate(`/jobs/${job.id}`)}
-          className="btn">View More
+        <button onClick={() => navigate(`/jobs/${job.id}`)} className="btn">
+          View More
         </button>
 
         {user.role === "company" && user.profile.name === job.company && (
-          <button 
+          <button
             onClick={() => navigate(`/jobs/${job.id}/applications`)}
-            className="btn btn-primary ml-2">View Applicants
+            className="btn btn-primary ml-2"
+          >
+            View Applicants
           </button>
         )}
       </div>

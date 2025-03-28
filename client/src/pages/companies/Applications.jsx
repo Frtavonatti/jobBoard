@@ -18,9 +18,9 @@ const Applications = () => {
       try {
         const [applicationsData, jobData] = await Promise.all([
           ApplicationService.getJobApplications(id, user.token),
-          JobService.getOneJob(id, user.token)
+          JobService.getOneJob(id, user.token),
         ]);
-        
+
         setApplications(applicationsData);
         setJob(jobData);
       } catch (error) {
@@ -37,7 +37,9 @@ const Applications = () => {
 
   return (
     <>
-      <h2 className="text-4xl m-4 font-bold">{job.title} at {job.company}</h2>
+      <h2 className="m-4 text-4xl font-bold">
+        {job.title} at {job.company}
+      </h2>
       <ApplicationBoard
         applications={applications}
         setApplications={setApplications}

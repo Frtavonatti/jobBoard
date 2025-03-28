@@ -7,7 +7,7 @@ const useTheme = (defaultTheme = "light") => {
 
   useEffect(() => {
     localStorage.setItem("theme", theme);
-    
+
     // DaisyUI uses the "data-theme" attribute on the <html> element
     document.documentElement.setAttribute("data-theme", theme);
 

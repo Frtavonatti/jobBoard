@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { draggable } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
-import getTimeDiff from "../../utils/getTimeDiff";
+import getTimeDiff from "../../lib/utils";
 
 const Card = ({ application }) => {
   const ref = useRef(null);
@@ -23,16 +23,11 @@ const Card = ({ application }) => {
     });
   }, [application]);
 
-
   return (
     <Link
       to={`/applications/${application.id}`}
       ref={ref}
-      className={`
-        bg-gray-300 dark:bg-slate-700
-        rounded-md border-gray-400 border p-4 
-        transition-all duration-200
-        ${isDragging ? "opacity-20 scale-[1.04] shadow-lg border-3 z-50" : ""}`}
+      className={`rounded-md border border-gray-400 bg-gray-300 p-4 transition-all duration-200 dark:bg-slate-700 ${isDragging ? "border-3 z-50 scale-[1.04] opacity-20 shadow-lg" : ""}`}
     >
       <h3 className="flex text-xl font-semibold dark:text-zinc-50">
         {application.data.firstName} {application.data.lastName}

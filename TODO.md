@@ -29,11 +29,12 @@
 - [x] Implement interactivy for review application page
 
 #### Candidates View
-- [ ] Create 'My Applications' page to view submitted applications
+- [x] Create 'My Applications' page to view submitted applications
 - [ ] Create 'My Profile' section to allow users modify its personal data
 - [x] Design interface for answering questions dynamically
-- [ ] Implement feature to filter jobs (by salary, area, location, others)
+- [ ] Implement feature to filter jobs (by salary, area, location, others) **next**
 - [ ] Implement like jobs feature
+- [ ] Evaluate implementation of a follow companies feature
 
 ## Notifications System
 - [ ] Implement notifications for request states
