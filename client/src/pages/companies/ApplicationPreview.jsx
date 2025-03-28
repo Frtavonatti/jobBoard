@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { Phone, Mail, MapPin, ArrowLeft, X } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import AppService from "../../services/applications";
-import getTimeDiff from "../../lib/utils";
 import FormSelect from "../../components/form/inputs/FormSelect";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
+import getTimeDiff from "../../lib/utils";
+import { statusColor } from "../../lib/constants";
 
 const ApplicationPreview = () => {
   const { id } = useParams();
@@ -47,8 +48,8 @@ const ApplicationPreview = () => {
     <div className="mx-auto max-w-4xl px-4 pt-8">
       <div className="mb-6 flex flex-row justify-between">
         <h2 className="text-2xl font-bold">Application Details</h2>
-        <span className="rounded bg-blue-100 p-2 text-xs font-bold text-blue-800 dark:bg-blue-900 dark:text-blue-300">
-          {application.status.toUpperCase()}
+        <span className={`rounded p-2 text-xs font-bold ${statusColor(application.status)}`}>
+          {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
         </span>
       </div>
 

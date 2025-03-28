@@ -21,7 +21,7 @@ const getCandidateApplications = async (userId, token) => {
   };
 
   try {
-    const response = await axios.get(`${baseUrl}/${userId}`, config);
+    const response = await axios.get(`${baseUrl}/user/${userId}`, config);
     return response.data;
   } catch (error) {
     console.error("Error fetching applications:", error);

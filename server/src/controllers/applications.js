@@ -11,17 +11,7 @@ applicationsRouter.get('/',
   res.status(200).json(applications);
 }));
 
-// GET applications (candidates)
-applicationsRouter.get('/:userId', 
-  asyncHandler(async (req, res) => {
-  const userId = req.params.userId;
-  const applications = await Application.find({ candidate_id: userId })
-    .populate({ path: 'job_id', select: 'title company' });
-  res.status(200).json(applications);
-  }
-));
-
-// GET application by id
+// GET application by id (companies)
 applicationsRouter.get('/:id', 
   [ verifyToken, verifyCompanyRole, findCompany ], // Add modified verifyJobOwnership
   asyncHandler(async (req, res) => {
@@ -52,6 +42,16 @@ applicationsRouter.get('/:id',
   }
   res.status(200).json(application);
 }));
+
+// GET my applications (candidates)
+applicationsRouter.get('/user/:userId', 
+  asyncHandler(async (req, res) => {
+  const userId = req.params.userId;
+  const applications = await Application.find({ candidate_id: userId })
+    .populate({ path: 'job_id', select: 'title company' });
+  res.status(200).json(applications);
+  }
+));
 
 // GET applications for a job
 applicationsRouter.get('/jobs/:jobId', 

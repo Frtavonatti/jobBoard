@@ -4,15 +4,7 @@ import Confetti from "react-confetti";
 import { useAuth } from "../../context/AuthContext";
 import appService from "../../services/applications";
 import Column from "./Column";
-
-const columns = [
-  { id: "applied", title: "New Applications" },
-  { id: "discarded", title: "Discarded" },
-  { id: "screening", title: "Screening" },
-  { id: "interview", title: "Interview" },
-  { id: "offer", title: "Offer" },
-  { id: "hired", title: "Hired" },
-];
+import { columns } from "../../lib/constants";
 
 const ApplicationBoard = ({ applications, setApplications }) => {
   const { user } = useAuth();
