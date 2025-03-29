@@ -12,7 +12,6 @@ const LoginPage = () => {
     event.preventDefault();
     try {
       const data = await login(email, password);
-      // console.log('Login successful:', data);
       return data;
     } catch (error) {
       console.error("Login failed:", error);

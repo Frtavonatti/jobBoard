@@ -1,6 +1,6 @@
 # Job Board Features
 
-### General fixes: 
+### General fixes (applications controller): 
 - [ ] Implement verifyCandidateRole middleware for candidate applications 
 - [ ] Fix answers questions population (currently being populated by job) **application controller**
 
@@ -32,8 +32,8 @@
 - [x] Create 'My Applications' page to view submitted applications
 - [ ] Create 'My Profile' section to allow users modify its personal data
 - [x] Design interface for answering questions dynamically
-- [ ] Implement feature to filter jobs (by salary, area, location, others) **next**
-- [ ] Implement like jobs feature
+- [x] Implement feature to filter jobs (by salary, area, location, others)
+- [ ] Implement like jobs feature **next**
 - [ ] Evaluate implementation of a follow companies feature
 
 ## Notifications System

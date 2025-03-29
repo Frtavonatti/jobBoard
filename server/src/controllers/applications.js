@@ -4,7 +4,7 @@ const asyncHandler = require('../middleware/asyncHandler');
 const { verifyToken, findCompany, verifyCompanyRole, verifyJobOwnership } = require('../middleware/auth');
 const { validateApplication } = require('../utils/applicationUtils');
 
-// GET all applications
+// GET all applications (admin)
 applicationsRouter.get('/',  
   asyncHandler(async (_req, res) => {
   const applications = await Application.find({});
@@ -17,17 +17,14 @@ applicationsRouter.get('/:id',
   asyncHandler(async (req, res) => {
   const id = req.params.id;
 
-  // TODO: Populate application with job details is a provisory solution
   const application = await Application.findById(id)
     .populate({
       path: 'job_id',
-      select: 'questions title company'
+      select: 'questions'
     })
     .lean();
   
-  // If application found, enhance the answers with question text
-  if (application) {
-    // Map the answers to include question text from job questions
+  if (application.length > 0) {
     application.answers = application.answers.map(answer => {
       const question = application.job_id.questions.find(
         q => q._id.toString() === answer.question_id.toString()
@@ -40,11 +37,13 @@ applicationsRouter.get('/:id',
       };
     });
   }
+
   res.status(200).json(application);
 }));
 
 // GET my applications (candidates)
 applicationsRouter.get('/user/:userId', 
+  verifyToken, // Implement verifyCandidateRole middleware
   asyncHandler(async (req, res) => {
   const userId = req.params.userId;
   const applications = await Application.find({ candidate_id: userId })
@@ -53,7 +52,7 @@ applicationsRouter.get('/user/:userId',
   }
 ));
 
-// GET applications for a job
+// GET applications for a job (companies)
 applicationsRouter.get('/jobs/:jobId', 
   [ verifyToken, verifyCompanyRole, findCompany, verifyJobOwnership ],
   asyncHandler(async (req, res) => {
@@ -99,7 +98,7 @@ applicationsRouter.post('/:jobId/apply',
   res.status(201).json(savedApplication);
 }));
 
-// PUT update application status
+// PUT update application status (companies)
 applicationsRouter.put('/:id', 
   [ verifyToken, verifyCompanyRole, findCompany ],
   asyncHandler(async (req, res) => {
