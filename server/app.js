@@ -7,6 +7,7 @@ const app = express()
 const jobsRouter = require('./src/controllers/jobs')
 const userRouter = require('./src/controllers/users')
 const applicationsRouter = require('./src/controllers/applications')
+const candidatesRouter = require('./src/controllers/likes')
 const logger = require('./src/middleware/logger')
 const errorHandler = require('./src/middleware/errorHandler')
 
@@ -29,6 +30,7 @@ mongoose.connect(config.MONGO_URI)
 app.use('/api/jobs', jobsRouter)
 app.use('/api/users', userRouter)
 app.use('/api/applications', applicationsRouter)
+app.use('/api/candidates', candidatesRouter)
 
 // Error handling middleware
 app.use(errorHandler)

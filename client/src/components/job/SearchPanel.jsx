@@ -68,7 +68,7 @@ const SearchPanel = ({ handleSearch, searchTerm, handleReset }) => {
         </div>
         <button 
           className="btn mt-6"
-          onChange={handleReset}
+          onClick={handleReset}
         >Reset</button>
       </div>
     </form>

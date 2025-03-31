@@ -11,7 +11,8 @@ const getProfileData = (user) => {
     return {
       id: user.candidate_id._id,
       firstName: user.candidate_id.first_name,
-      lastName: user.candidate_id.last_name
+      lastName: user.candidate_id.last_name,
+      likes: user.candidate_id.liked_jobs
     }
   }
   return null

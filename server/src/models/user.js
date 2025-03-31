@@ -26,6 +26,7 @@ const companySchema = new mongoose.Schema({
 const candidateSchema = new mongoose.Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
+  liked_jobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
 })
 
 // Transform functions

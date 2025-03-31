@@ -24,7 +24,8 @@ const JobList = ({ jobs, pageTitle}) => {
     });
   };
 
-  const handleReset = () => {
+  const handleReset = (e) => {
+    e.preventDefault();
     setSearchTerm(initialSearchTerm);
   };
 
