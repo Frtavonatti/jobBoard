@@ -28,9 +28,17 @@ const CardActions = ({ job, isLiked, removeJob, handleLike }) => {
       : user.role === 'candidate' && (
         <button 
           className="mb-auto rounded-lg bg-slate-200 p-1 hover:bg-slate-300 dark:bg-slate-600"
-          onClick={() => handleLike(job.id, user.token)}  
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleLike();
+          }}  
         >
-          <Heart size={20} className={`dark:text-slate-100 ${isLiked ? 'text-red-500 dark:text-red-500' : ''}`} />
+          <Heart 
+            size={20} 
+            className={`dark:text-slate-100 ${isLiked ? 'text-red-500 dark:text-red-500 fill-red-500' : ''}`}
+            fill={isLiked ? 'currentColor' : 'none'}  
+          />
         </button>
         )
       }

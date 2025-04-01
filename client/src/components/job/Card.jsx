@@ -21,16 +21,12 @@ const Card = ({ job }) => {
 
   const handleLike = async () => {
     try {
-      const scrollPosition = window.scrollY;
-
       setIsLiked(!isLiked);
       await likeService.toggleLikeJob(job.id, user.token);
 
       const updatedLikes = isLiked
         ? user.profile.likes.filter((id) => id !== job.id)
         : [...user.profile.likes, job.id];
-      
-      window.scrollTo(0, scrollPosition);
       
       setUser({
         ...user,

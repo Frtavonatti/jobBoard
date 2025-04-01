@@ -34,8 +34,8 @@
 - [ ] Create 'My Profile' section to allow users modify its personal data
 - [x] Design interface for answering questions dynamically
 - [x] Implement feature to filter jobs (by salary, area, location, others)
-- [x] Implement like jobs feature **current**
-- [ ] Fix: Page scrolls to top when liking a job post **next**
+- [x] Implement like jobs feature
+- [ ] Fix: Page scrolls to top when liking a job post **current**
 - [ ] Create liked jobs page **next**
 - [ ] Evaluate implementation of a follow companies feature
 
