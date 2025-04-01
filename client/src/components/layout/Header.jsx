@@ -26,9 +26,14 @@ const Header = ({ handleTheme, user }) => {
               {user.role === "company" ? (
                 <Link to="/myjobs">My Jobs</Link>
               ) : (
-                <Link to={`/myapplications/${user.profile.id}`}>
-                  My Applications
-                </Link>
+                <>
+                  <Link to={`/myapplications/${user.profile.id}`}>
+                    My Applications
+                  </Link>
+                  <Link to={`/likedjobs`}>
+                    Liked jobs
+                  </Link>
+                </>
               )}
             </li>
             <li>

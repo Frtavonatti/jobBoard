@@ -36,7 +36,7 @@
 - [x] Implement feature to filter jobs (by salary, area, location, others)
 - [x] Implement like jobs feature
 - [ ] Fix: Page scrolls to top when liking a job post **current**
-- [ ] Create liked jobs page **next**
+- [x] Create liked jobs page
 - [ ] Evaluate implementation of a follow companies feature
 
 ## Notifications System

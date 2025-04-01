@@ -7,6 +7,7 @@ import JobListPage from "./pages/JobListPage";
 import JobDetailsPage from "./pages/JobDetailsPage";
 import ApplicationForm from "./pages/candidates/ApplicationForm";
 import MyApplications from "./pages/candidates/MyApplications";
+import LikedJobs from "./pages/candidates/LikedJobs";
 import MyJobsList from "./pages/companies/MyJobsList";
 import NewJobForm from "./pages/companies/NewJobForm";
 import EditJobForm from "./pages/companies/EditJobForm";
@@ -36,10 +37,8 @@ function App() {
             <Route path="/" element={<JobListPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />
             <Route path="/jobs/:id/apply" element={<ApplicationForm />} />
-            <Route
-              path="/myapplications/:userId"
-              element={<MyApplications />}
-            />
+            <Route path="/myapplications/:userId" element={<MyApplications />} />
+            <Route path="/likedjobs" element={<LikedJobs />} />
           </Route>
 
           {/* Protected routes only for companies */}
